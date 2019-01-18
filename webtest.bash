@@ -70,41 +70,73 @@ echo '### DETAILS ###';
 echo;
 
 echo '## p=details & n=1 & i=1 ##';
-if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="big" src="1/kitchen.jpg"/>';
-	then echo ' - OK   : found expected big pic 1:1';
-	else echo ' - Wrong: avoid expected big pic 1:1'; status=Wrong;
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="big"   src="1/kitchen.jpg"/>';
+	then echo ' - OK   : found expected big   pic 1:1';
+	else echo ' - Wrong: avoid expected big   pic 1:1'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="small" src="1/vestible.jpg"/>';
+	then echo ' - OK   : found expected small pic 1:2';
+	else echo ' - Wrong: avoid expected small pic 1:2'; status=Wrong;
 fi;
 
 echo;
 
 echo '## p=details & n=1 & i=2 ##';
-if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="big" src="1/vestible.jpg"/>';
-	then echo ' - OK   : found expected big pic 1:2';
-	else echo ' - Wrong: avoid expected big pic 1:2'; status=Wrong;
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="small" src="1/kitchen.jpg"/>';
+	then echo ' - OK   : found expected small pic 1:1';
+	else echo ' - Wrong: avoid expected small pic 1:1'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="big"   src="1/vestible.jpg"/>';
+	then echo ' - OK   : found expected big   pic 1:2';
+	else echo ' - Wrong: avoid expected big   pic 1:2'; status=Wrong;
 fi;
 
 echo;
 
 echo '## p=details & n=2 & i=1 ##';
-if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="big" src="2/kitchen.jpg"/>';
-	then echo ' - OK   : found expected big pic 2:1';
-	else echo ' - Wrong: avoid expected big pic 2:1'; status=Wrong;
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="big"   src="2/kitchen.jpg"/>';
+	then echo ' - OK   : found expected big   pic 2:1';
+	else echo ' - Wrong: avoid expected big   pic 2:1'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="small" src="2/toilet.jpg"/>';
+	then echo ' - OK   : found expected small pic 2:2';
+	else echo ' - Wrong: avoid expected small pic 2:2'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="small" src="2/bedroom.jpg"/>';
+	then echo ' - OK   : found expected small pic 2:3';
+	else echo ' - Wrong: avoid expected small pic 2:3'; status=Wrong;
 fi;
 
 echo;
 
 echo '## p=details & n=2 & i=2 ##';
-if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="big" src="2/toilet.jpg"/>';
-	then echo ' - OK   : found expected big pic 2:2';
-	else echo ' - Wrong: avoid expected big pic 2:2'; status=Wrong;
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="small" src="2/kitchen.jpg"/>';
+	then echo ' - OK   : found expected small pic 2:1';
+	else echo ' - Wrong: avoid expected small pic 2:1'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="big"   src="2/toilet.jpg"/>';
+	then echo ' - OK   : found expected big   pic 2:2';
+	else echo ' - Wrong: avoid expected big   pic 2:2'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="small" src="2/bedroom.jpg"/>';
+	then echo ' - OK   : found expected small pic 2:3';
+	else echo ' - Wrong: avoid expected small pic 2:3'; status=Wrong;
 fi;
 
 echo;
 
 echo '## p=details & n=2 & i=3 ##';
-if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="big" src="2/bedroom.jpg"/>';
-	then echo ' - OK   : found expected big pic 2:3';
-	else echo ' - Wrong: avoid expected big pic 2:3'; status=Wrong;
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="small" src="2/kitchen.jpg"/>';
+	then echo ' - OK   : found expected small pic 2:1';
+	else echo ' - Wrong: avoid expected small pic 2:1'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="small" src="2/toilet.jpg"/>';
+	then echo ' - OK   : found expected small pic 2:2';
+	else echo ' - Wrong: avoid expected small pic 2:2'; status=Wrong;
+fi;
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="big"   src="2/bedroom.jpg"/>';
+	then echo ' - OK   : found expected big   pic 2:3';
+	else echo ' - Wrong: avoid expected big   pic 2:3'; status=Wrong;
 fi;
 
 echo;
