@@ -2,6 +2,10 @@
 
 status=OK
 
+echo '### OVERVIEW ###';
+
+echo;
+
 echo '## No GET param ##';
 if   curl -sS localhost:8000     | grep -q '<a href="?n=2">15s</a>'      ; then echo ' + OK   : wait for the second'          ; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi;
 if   curl -sS localhost:8000     | grep -q '<a href="?n=2">Tovább</a>'   ; then echo ' + OK   : it can proceed to second'     ; else echo ' - Wrong: it cannot proceed to second'    ; status=Wrong; fi;
@@ -12,7 +16,7 @@ if   curl -sS localhost:8000     | grep -q 'kitchen.jpg'                 ; then 
 if   curl -sS localhost:8000     | grep -q 'vestible.jpg'                ; then echo ' + OK   : found   expected picture 1:2 '; else echo ' - Wrong: avoid   expected picture 1:2'   ; status=Wrong; fi;
 if ! curl -sS localhost:8000     | grep -q 'toilet.jpg'                  ; then echo ' + OK   : avoid unexpected picture 2:2' ; else echo ' - Wrong: found unexpected picture 2:2'   ; status=Wrong; fi;
 if ! curl -sS localhost:8000     | grep -q 'bedroom.jpg'                 ; then echo ' + OK   : avoid unexpected picture 2:3' ; else echo ' - Wrong: found unexpected picture 2:3'   ; status=Wrong; fi;
-if   curl -sS localhost:8000     | grep -q '<a href="?p=details&n=1">Click for details!</a>';
+if   curl -sS localhost:8000     | grep -q '<a href="?p=details&n=1&i=1">Click for details!</a>';
 	then echo ' + OK   : clickable for details for record 1';
 	else echo ' - Wrong: not clickable for details for record 1'; status=Wrong;
 fi;
@@ -29,7 +33,7 @@ if   curl -sS localhost:8000?n=1 | grep -q 'kitchen.jpg'                 ; then 
 if   curl -sS localhost:8000?n=1 | grep -q 'vestible.jpg'                ; then echo ' + OK   : found   expected picture 1:2 '; else echo ' - Wrong: avoid   expected picture 1:2'   ; status=Wrong; fi;
 if ! curl -sS localhost:8000?n=1 | grep -q 'toilet.jpg'                  ; then echo ' + OK   : avoid unexpected picture 2:2' ; else echo ' - Wrong: found unexpected picture 2:2'   ; status=Wrong; fi;
 if ! curl -sS localhost:8000?n=1 | grep -q 'bedroom.jpg'                 ; then echo ' + OK   : avoid unexpected picture 2:3' ; else echo ' - Wrong: found unexpected picture 2:3'   ; status=Wrong; fi;
-if   curl -sS localhost:8000?n=1 | grep -q '<a href="?p=details&n=1">Click for details!</a>';
+if   curl -sS localhost:8000?n=1 | grep -q '<a href="?p=details&n=1&i=1">Click for details!</a>';
 	then echo ' + OK   : clickable for details for record 1';
 	else echo ' - Wrong: not clickable for details for record 1'; status=Wrong;
 fi;
@@ -46,7 +50,7 @@ if ! curl -sS localhost:8000?n=2 | grep -q 'vestible.jpg'                ; then 
 if   curl -sS localhost:8000?n=2 | grep -q 'kitchen.jpg'                 ; then echo ' + OK   : found   expected picture 2:1 '; else echo ' - Wrong: avoid   expected picture 2:1'   ; status=Wrong; fi;
 if   curl -sS localhost:8000?n=2 | grep -q 'toilet.jpg'                  ; then echo ' + OK   : found   expected picture 2:2' ; else echo ' - Wrong: avoid   expected picture 2:2'   ; status=Wrong; fi;
 if ! curl -sS localhost:8000?n=2 | grep -q 'bedroom.jpg'                 ; then echo ' + OK   : avoid   0roomfor picture 2:3' ; else echo ' - Wrong: found   0roomfor picture 2:3'   ; status=Wrong; fi;
-if   curl -sS localhost:8000?n=2 | grep -q '<a href="?p=details&n=2">Click for details!</a>';
+if   curl -sS localhost:8000?n=2 | grep -q '<a href="?p=details&n=2&i=1">Click for details!</a>';
 	then echo ' + OK   : clickable for details for record 2';
 	else echo ' - Wrong: not clickable for details for record 2'; status=Wrong;
 fi;
@@ -58,6 +62,50 @@ if   curl -sS localhost:8000     | grep -q '<a href="?n=2">15s</a>'   ; then ech
 if   curl -sS localhost:8000?n=3 | grep -q '[Ee]rror'                    ; then echo ' + OK   : error page'                   ; else echo ' - Wrong: there is no error page'         ; status=Wrong; fi;
 if ! curl -sS localhost:8000?n=3 | grep -q 'Vörös'                       ; then echo ' + OK   : no address 1 on an error page'; else echo ' - Wrong: why address on an error page?!' ; status=Wrong; fi;
 if ! curl -sS localhost:8000?n=3 | grep -q 'Őzes'                        ; then echo ' + OK   : no address 2 on an error page'; else echo ' - Wrong: why address on an error page?!' ; status=Wrong; fi;
+
+echo;
+
+echo '### DETAILS ###';
+
+echo;
+
+echo '## p=details & n=1 & i=1 ##';
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="big" src="1/kitchen.jpg"/>';
+	then echo ' - OK   : found expected big pic 1:1';
+	else echo ' - Wrong: avoid expected big pic 1:1'; status=Wrong;
+fi;
+
+echo;
+
+echo '## p=details & n=1 & i=2 ##';
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="big" src="1/vestible.jpg"/>';
+	then echo ' - OK   : found expected big pic 1:2';
+	else echo ' - Wrong: avoid expected big pic 1:2'; status=Wrong;
+fi;
+
+echo;
+
+echo '## p=details & n=2 & i=1 ##';
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="big" src="2/kitchen.jpg"/>';
+	then echo ' - OK   : found expected big pic 2:1';
+	else echo ' - Wrong: avoid expected big pic 2:1'; status=Wrong;
+fi;
+
+echo;
+
+echo '## p=details & n=2 & i=2 ##';
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="big" src="2/toilet.jpg"/>';
+	then echo ' - OK   : found expected big pic 2:2';
+	else echo ' - Wrong: avoid expected big pic 2:2'; status=Wrong;
+fi;
+
+echo;
+
+echo '## p=details & n=2 & i=3 ##';
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="big" src="2/bedroom.jpg"/>';
+	then echo ' - OK   : found expected big pic 2:3';
+	else echo ' - Wrong: avoid expected big pic 2:3'; status=Wrong;
+fi;
 
 echo;
 
