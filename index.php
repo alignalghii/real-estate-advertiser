@@ -16,7 +16,7 @@ switch ($p) {
 		$controller = new DetailsController($n, $i);
 		break;
 	default:
-		$controller = new ErrorController('No such page');
+		$controller = new ErrorController("Error: No such page as [$p]");
 }
 
 $controller->index();

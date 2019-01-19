@@ -166,6 +166,18 @@ if ! curl -sS 'localhost:8000?p=details&n=3&i=1' | grep -q 'Vörös'            
 if ! curl -sS 'localhost:8000?p=details&n=3&i=1' | grep -q 'Őzes'                        ; then echo ' + OK   : no address 2 on an error page'; else echo ' - Wrong: why address on an error page?!' ; status=Wrong; fi;
 if ! curl -sS 'localhost:8000?p=details&n=3&i=1' | grep -q '<img[^<>]*>'                 ; then echo ' + OK   : no picture on error page'     ; else echo ' - Wrong: why picture on error page?!'    ; status=Wrong; fi;
 if ! curl -sS 'localhost:8000?p=details&n=3&i=1' | grep -q '15s'                         ; then echo ' + OK   : no waiting on error page'     ; else echo ' - Wrong: why waiting on error page?!'    ; status=Wrong; fi;
+
+echo;
+
+echo '### WRONG PAGE ###';
+
+echo '## p = wrongpage ##';
+if   curl -sS localhost:8000?p=wrongpage | grep -q '[Ee]rror'                    ; then echo ' + OK   : error page'                   ; else echo ' - Wrong: there is no error page'         ; status=Wrong; fi;
+if ! curl -sS localhost:8000?p=wrongpage | grep -q 'Vörös'                       ; then echo ' + OK   : no address 1 on an error page'; else echo ' - Wrong: why address on an error page?!' ; status=Wrong; fi;
+if ! curl -sS localhost:8000?p=wrongpage | grep -q 'Őzes'                        ; then echo ' + OK   : no address 2 on an error page'; else echo ' - Wrong: why address on an error page?!' ; status=Wrong; fi;
+if ! curl -sS localhost:8000?p=wrongpage | grep -q '<img[^<>]*>'                 ; then echo ' + OK   : no picture on error page'     ; else echo ' - Wrong: why picture on error page?!'    ; status=Wrong; fi;
+if ! curl -sS localhost:8000?p=wrongpage | grep -q '15s'                         ; then echo ' + OK   : no waiting on error page'     ; else echo ' - Wrong: why waiting on error page?!'    ; status=Wrong; fi;
+
 echo;
 
 echo '=================';

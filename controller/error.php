@@ -6,5 +6,5 @@ class ErrorController
 
 	public function __construct(string $message) {$this->message = $message;}
 
-	public function index() {}
+	public function index() {echo $this->message;}
 }
