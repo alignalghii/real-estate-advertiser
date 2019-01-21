@@ -1,0 +1,2 @@
+ - Router/controller, models etc: make difference between error and log
+ - Testing: unit tests in addition to webtest
