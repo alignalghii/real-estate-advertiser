@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Db.php';
+
 class Model
 {
 	public static function numberOfFlats(): int
