@@ -11,9 +11,16 @@ class DbTest extends TestCase
 		['id' => 2, 'address' => 'Őzes út  67'],
 	];
 
-	public function testQuery(): void
+	public function testCanQueryAllRecords(): void
 	{
 		$actualAll = Db::query('SELECT * FROM flat');
 		$this->assertEquals(self::expectedAll, $actualAll);
+	}
+
+	public function testCanQuerySelectedRecords(): void
+	{
+		$actual   = Db::query('SELECT * FROM flat WHERE id = :id', [':id' => [2, \PDO::PARAM_INT]]);
+		$expected = [['id' => 2, 'address' => 'Őzes út  67']];
+		$this->assertEquals($expected, $actual);
 	}
 }
