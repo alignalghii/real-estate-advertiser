@@ -18,6 +18,9 @@ class OverviewController
 			if ($n < $numberOfFlats) echo '<a href="?n='.($n+1).'">Tovább</a>';
 			echo '<br/>';
 			echo '<a href="?n='.($n<$numberOfFlats ? $n+1 : 1).'">15s</a>';
+			echo '<br/>';
+			$flats = Model::allFlats();
+			echo $flats[$n-1]['address'];
 		} else {
 			echo 'Error: wrong index number for record';
 		}
