@@ -19,8 +19,16 @@ class OverviewController
 			echo '<br/>';
 			echo '<a href="?n='.($n<$numberOfFlats ? $n+1 : 1).'">15s</a>';
 			echo '<br/>';
+			echo sprintf('<a href="?p=details&n=%d&i=1">Click for details!</a>', $n);
+			echo '<br/>';
 			$flats = Model::allFlats();
 			echo $flats[$n-1]['address'];
+			$pictures  = Model::picturesOfFlat($n);
+			echo '<ul>';
+			foreach ($pictures as $i => $picture) {
+				if ($i < 2) echo '<li>'.$pictures[$i]['filename'].'</li>';
+			}
+			echo '</ul>';
 		} else {
 			echo 'Error: wrong index number for record';
 		}

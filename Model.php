@@ -13,4 +13,9 @@ class Model
 	{
 		return Db::query('SELECT * FROM `flat`');
 	}
+
+	public static function picturesofFlat(int $flatId): array
+	{
+		return Db::query('SELECT * FROM `picture` WHERE `flat_id` = :flat_id', [':flat_id' => [$flatId, \PDO::PARAM_INT]]);
+	}
 }

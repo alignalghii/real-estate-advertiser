@@ -1,2 +1,3 @@
  - Router/controller, models etc: make difference between error and log
  - Testing: unit tests in addition to webtest
+ - In the database, the `id` values do not coincide necessarily with 1...COUNT-1 ranges, they may go higher, leaving holes. The Model whwn using GET params should not go wrong!
