@@ -81,6 +81,10 @@ if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 1:2'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 1:2'; status=Wrong;
 fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<a href="?p=overview&n=1">Áttekintéshez újra</a>';
+	then echo ' - OK   :   possible to go return to overview'; let nOK++;
+	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
+fi; let nAll++;
 
 echo;
 
@@ -92,6 +96,10 @@ fi; let nAll++;
 if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="big" src="1/vestible.jpg"/>';
 	then echo ' - OK   : found expected big   pic 1:2'; let nOK++;
 	else echo ' - Wrong: avoid expected big   pic 1:2'; status=Wrong;
+fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<a href="?p=overview&n=1">Áttekintéshez újra</a>';
+	then echo ' - OK   :   possible to go return to overview'; let nOK++;
+	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
 fi; let nAll++;
 
 echo;
@@ -118,6 +126,10 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 2:3'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 2:3'; status=Wrong;
 fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<a href="?p=overview&n=2">Áttekintéshez újra</a>';
+	then echo ' - OK   :   possible to go return to overview'; let nOK++;
+	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
+fi; let nAll++;
 
 echo;
 
@@ -134,6 +146,10 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 2:3'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 2:3'; status=Wrong;
 fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<a href="?p=overview&n=2">Áttekintéshez újra</a>';
+	then echo ' - OK   :   possible to go return to overview'; let nOK++;
+	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
+fi; let nAll++;
 
 echo;
 
@@ -149,6 +165,10 @@ fi; let nAll++;
 if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="big" src="2/bedroom.jpg"/>';
 	then echo ' - OK   : found expected big   pic 2:3'; let nOK++;
 	else echo ' - Wrong: avoid expected big   pic 2:3'; status=Wrong;
+fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<a href="?p=overview&n=2">Áttekintéshez újra</a>';
+	then echo ' - OK   :   possible to go return to overview'; let nOK++;
+	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
 fi; let nAll++;
 
 echo;
