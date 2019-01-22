@@ -42,7 +42,7 @@ fi; let nAll++;
 
 echo;
 
-echo '## n = 2 ##'; let nAll++;
+echo '## n = 2 ##';
 if   curl -sS localhost:8000?n=2 | grep -q '<a href="?n=1">15s</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=2 | grep -q '<a href="?n=[0-9]\+">Tovább</a>'; then echo ' + OK   : there is no more nextpage'    ; let nOK++; else echo ' - Wrong: it thinks there is a nextpage'  ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000?n=2 | grep -q '<a href="?n=1">Vissza</a>'      ; then echo ' + OK   : there is a prevpage indeed'   ; let nOK++; else echo ' - Wrong: it thinks there is no prev page'; status=Wrong; fi; let nAll++;
@@ -73,7 +73,7 @@ echo '### DETAILS ###';
 echo;
 
 echo '## p=details & n=1 & i=1 ##';
-if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="big"   src="1/kitchen.jpg"/>';
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="big" src="1/kitchen.jpg"/>';
 	then echo ' - OK   : found expected big   pic 1:1'; let nOK++;
 	else echo ' - Wrong: avoid expected big   pic 1:1'; status=Wrong;
 fi; let nAll++;
@@ -89,7 +89,7 @@ if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 1:1'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 1:1'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="big"   src="1/vestible.jpg"/>';
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="big" src="1/vestible.jpg"/>';
 	then echo ' - OK   : found expected big   pic 1:2'; let nOK++;
 	else echo ' - Wrong: avoid expected big   pic 1:2'; status=Wrong;
 fi; let nAll++;
@@ -106,7 +106,7 @@ if ! curl -sS 'localhost:8000?p=details&n=1&i=3' | grep -q '15s'                
 echo;
 
 echo '## p=details & n=2 & i=1 ##';
-if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="big"   src="2/kitchen.jpg"/>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="big" src="2/kitchen.jpg"/>';
 	then echo ' - OK   : found expected big   pic 2:1'; let nOK++;
 	else echo ' - Wrong: avoid expected big   pic 2:1'; status=Wrong;
 fi; let nAll++;
@@ -126,7 +126,7 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 2:1'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 2:1'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="big"   src="2/toilet.jpg"/>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="big" src="2/toilet.jpg"/>';
 	then echo ' - OK   : found expected big   pic 2:2'; let nOK++;
 	else echo ' - Wrong: avoid expected big   pic 2:2'; status=Wrong;
 fi; let nAll++;
@@ -146,7 +146,7 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 2:2'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 2:2'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="big"   src="2/bedroom.jpg"/>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="big" src="2/bedroom.jpg"/>';
 	then echo ' - OK   : found expected big   pic 2:3'; let nOK++;
 	else echo ' - Wrong: avoid expected big   pic 2:3'; status=Wrong;
 fi; let nAll++;
