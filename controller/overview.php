@@ -31,7 +31,7 @@ class OverviewController
 			}
 			echo '</ul>';
 		} else {
-			echo 'Error: wrong index number for record';
+			echo 'Error: wrong index number for flat record';
 		}
 	}
 }

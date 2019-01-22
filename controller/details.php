@@ -29,10 +29,10 @@ class DetailsController
 				}
 				echo '</ul>';
 			} else {
-				echo "Error: ";
+				echo "Error: wrong index for picture";
 			}
 		} else {
-			echo "Error: ";
+			echo "Error: wrong index for flat record";
 		}
 	}
 }
