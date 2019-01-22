@@ -13,6 +13,7 @@ class OverviewController
 		$numberOfFlats = Model::numberOfFlats();
 		$n = $this->n;
 		if (1 <= $n && $n <= $numberOfFlats) {
+			echo '<link rel="stylesheet" type="text/css" href="gallery.css"/>';
 			if ($n > 1)              echo '<a href="?n='.($n-1).'">Vissza</a>';
 			echo '<br/>';
 			if ($n < $numberOfFlats) echo '<a href="?n='.($n+1).'">Tovább</a>';
@@ -26,7 +27,7 @@ class OverviewController
 			$pictures  = Model::picturesOfFlat($n);
 			echo '<ul>';
 			foreach ($pictures as $i => $picture) {
-				if ($i < 2) echo '<li>'.$pictures[$i]['filename'].'</li>';
+				if ($i < 2) echo "<li><img class=\"half\" src=\"$n/{$pictures[$i]['filename']}\"/></li>";
 			}
 			echo '</ul>';
 		} else {

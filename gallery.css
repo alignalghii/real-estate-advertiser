@@ -1,0 +1,17 @@
+img.small {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+img.half {
+	border: 1px solid #888;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+img.big {
+	border: 1px solid black;
+	border-radius: 4px;
+	padding: 5px;
+}

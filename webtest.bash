@@ -14,8 +14,8 @@ if   curl -sS localhost:8000     | grep -q '<a href="?n=2">Tovább</a>'   ; then
 if ! curl -sS localhost:8000     | grep -q '<a href="?n=[0-9]\+">Vissza</a>'; then echo ' + OK   : there is no prevpage indeed'  ; let nOK++; else echo ' - Wrong: it thinks there is a prev page' ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000     | grep -q 'Vörös'                       ; then echo ' + OK   : found   expected address 1'   ; let nOK++; else echo ' - Wrong: avoid   expected address 1'     ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000     | grep -q 'Őzes'                        ; then echo ' + OK   : avoid unexpected address 2'   ; let nOK++; else echo ' - Wrong: found unexpected address 2'     ; status=Wrong; fi; let nAll++;
-if   curl -sS localhost:8000     | grep -q 'kitchen.jpg'                 ; then echo ' + OK   : found   expected picture 1:1 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:1'   ; status=Wrong; fi; let nAll++;
-if   curl -sS localhost:8000     | grep -q 'vestible.jpg'                ; then echo ' + OK   : found   expected picture 1:2 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:2'   ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000     | grep -q '<img class="half" src="1/kitchen.jpg"/>' ; then echo ' + OK   : found   expected picture 1:1 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:1'   ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000     | grep -q '<img class="half" src="1/vestible.jpg"/>'; then echo ' + OK   : found   expected picture 1:2 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:2'   ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000     | grep -q 'toilet.jpg'                  ; then echo ' + OK   : avoid unexpected picture 2:2' ; let nOK++; else echo ' - Wrong: found unexpected picture 2:2'   ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000     | grep -q 'bedroom.jpg'                 ; then echo ' + OK   : avoid unexpected picture 2:3' ; let nOK++; else echo ' - Wrong: found unexpected picture 2:3'   ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000     | grep -q '<a href="?p=details&n=1&i=1">Click for details!</a>';
@@ -31,8 +31,8 @@ if   curl -sS localhost:8000?n=1 | grep -q '<a href="?n=2">Tovább</a>'   ; then
 if ! curl -sS localhost:8000?n=1 | grep -q '<a href="?n=[0-9]\+">Vissza</a>'; then echo ' + OK   : there is no prevpage indeed'  ; let nOK++; else echo ' - Wrong: it thinks there is a prev page' ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000?n=1 | grep -q 'Vörös'                       ; then echo ' + OK   : found   expected address 1'   ; let nOK++; else echo ' - Wrong: avoid   expected address 1'     ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=1 | grep -q 'Őzes'                        ; then echo ' + OK   : avoid unexpected address 2'   ; let nOK++; else echo ' - Wrong: found unexpected address 2'     ; status=Wrong; fi; let nAll++;
-if   curl -sS localhost:8000?n=1 | grep -q 'kitchen.jpg'                 ; then echo ' + OK   : found   expected picture 1:1 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:1'   ; status=Wrong; fi; let nAll++;
-if   curl -sS localhost:8000?n=1 | grep -q 'vestible.jpg'                ; then echo ' + OK   : found   expected picture 1:2 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:2'   ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=1 | grep -q '<img class="half" src="1/kitchen.jpg"/>' ; then echo ' + OK   : found   expected picture 1:1 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:1'   ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=1 | grep -q '<img class="half" src="1/vestible.jpg"/>'; then echo ' + OK   : found   expected picture 1:2 '; let nOK++; else echo ' - Wrong: avoid   expected picture 1:2'   ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=1 | grep -q 'toilet.jpg'                  ; then echo ' + OK   : avoid unexpected picture 2:2' ; let nOK++; else echo ' - Wrong: found unexpected picture 2:2'   ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=1 | grep -q 'bedroom.jpg'                 ; then echo ' + OK   : avoid unexpected picture 2:3' ; let nOK++; else echo ' - Wrong: found unexpected picture 2:3'   ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000?n=1 | grep -q '<a href="?p=details&n=1&i=1">Click for details!</a>';
@@ -49,8 +49,8 @@ if   curl -sS localhost:8000?n=2 | grep -q '<a href="?n=1">Vissza</a>'      ; th
 if ! curl -sS localhost:8000?n=2 | grep -q 'Vörös'                       ; then echo ' + OK   : avoid unexpected address 1'   ; let nOK++; else echo ' - Wrong: found unexpected address 1'     ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000?n=2 | grep -q 'Őzes'                        ; then echo ' + OK   : found   expected address 2'   ; let nOK++; else echo ' - Wrong: avoid   expected address 2'     ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=2 | grep -q 'vestible.jpg'                ; then echo ' + OK   : avoid unexpected picture 1:2 '; let nOK++; else echo ' - Wrong: avoid unexpected picture 1:2'   ; status=Wrong; fi; let nAll++;
-if   curl -sS localhost:8000?n=2 | grep -q 'kitchen.jpg'                 ; then echo ' + OK   : found   expected picture 2:1 '; let nOK++; else echo ' - Wrong: avoid   expected picture 2:1'   ; status=Wrong; fi; let nAll++;
-if   curl -sS localhost:8000?n=2 | grep -q 'toilet.jpg'                  ; then echo ' + OK   : found   expected picture 2:2' ; let nOK++; else echo ' - Wrong: avoid   expected picture 2:2'   ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=2 | grep -q '<img class="half" src="2/kitchen.jpg"/>'; then echo ' + OK   : found   expected picture 2:1 '; let nOK++; else echo ' - Wrong: avoid   expected picture 2:1'   ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=2 | grep -q '<img class="half" src="2/toilet.jpg"/>' ; then echo ' + OK   : found   expected picture 2:2' ; let nOK++; else echo ' - Wrong: avoid   expected picture 2:2'   ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=2 | grep -q 'bedroom.jpg'                 ; then echo ' + OK   : avoid   0roomfor picture 2:3' ; let nOK++; else echo ' - Wrong: found   0roomfor picture 2:3'   ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000?n=2 | grep -q '<a href="?p=details&n=2&i=1">Click for details!</a>';
 	then echo ' + OK   : clickable for details for record 2'    ; let nOK++;
