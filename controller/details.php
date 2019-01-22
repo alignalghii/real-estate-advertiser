@@ -20,6 +20,8 @@ class DetailsController
 			if (1 <= $i && $i <= $numberOfPictures) {
 				echo '<link rel="stylesheet" type="text/css" href="gallery.css"/>';
 				echo "<a href=\"?p=overview&n=$n\">Áttekintéshez újra</a>";
+				echo '<br/>';
+				echo "<a href=\"?p=overview&n=$n\">60s</a>";
 				echo '<ul>';
 				foreach ($pictures as $running => $picture) {
 					$class = $running+1 == $i ? 'big' : 'small';
