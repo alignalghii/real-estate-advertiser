@@ -1,3 +1,9 @@
  - Router/controller, models etc: make difference between error and log
  - Testing: unit tests in addition to webtest
  - In the database, the `id` values do not coincide necessarily with 1...COUNT-1 ranges, they may go higher, leaving holes. The Model whwn using GET params should not go wrong!
+ - In URLs, write `&amp;` instead of the `&`-sign, as latter is a sensitive character, while the usage of the ampersand HTML-entity is safer
+ - Also the overview page should be able to take GET-parameter `i` for image pointer. While the page itself does not show it explicity, it should remember it for the case of jumping to details.
+ - Also the overview page can change explicitly for the `i` picture index: the seletion of the two medium pictures shoul depend on it.
+ - Details page has also a timed event to return to the overview page, not only the explicit linking back.
+ - Error pages should provide explanation, at least in the development version.
+ - Later, on error pages, make difference between user-visible conseiling vs developer-used logging.
