@@ -22,6 +22,10 @@ class DetailsController
 				echo "<a href=\"?p=overview&n=$n\">Áttekintéshez vissza</a>";
 				echo '<br/>';
 				echo "<a href=\"?p=overview&n=$n\">60s</a>";
+				echo '<br/>';
+				if ($i > 1                ) echo sprintf("<a href=\"?p=details&n=$n&i=%d\">Előző</a>"    , $i-1);
+				echo '<br/>';
+				if ($i < $numberOfPictures) echo sprintf("<a href=\"?p=details&n=$n&i=%d\">Következő</a>", $i+1);
 				echo '<ul>';
 				foreach ($pictures as $running => $picture) {
 					$class = $running+1 == $i ? 'big' : 'small';

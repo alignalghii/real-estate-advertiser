@@ -89,6 +89,14 @@ if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<a href="?p=overview
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<a href="?p=details&n=1&i=2">Következő</a>';
+	then echo ' - OK   :   possible to move focus to next picture' ; let nOK++;
+	else echo ' - Wrong: impossible to move focus to next picture' ; status=Wrong;
+fi; let nAll++;
+if ! curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<a href="[^"*]">Előző</a>';
+	then echo ' - OK   : impossible to move focus to previous picture' ; let nOK++;
+	else echo ' - Wrong:   possible to move focus to previous picture' ; status=Wrong;
+fi; let nAll++;
 
 echo;
 
@@ -108,6 +116,14 @@ fi; let nAll++;
 if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<a href="?p=overview&n=1">60s</a>';
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
+fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<a href="?p=details&n=1&i=1">Előző</a>';
+	then echo ' - OK   :   possible to move focus to previous picture' ; let nOK++;
+	else echo ' - Wrong: impossible to move focus to previous picture' ; status=Wrong;
+fi; let nAll++;
+if ! curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<a href="[^"*]">Következő</a>';
+	then echo ' - OK   : impossible to move focus to next picture' ; let nOK++;
+	else echo ' - Wrong:   possible to move focus to next picture' ; status=Wrong;
 fi; let nAll++;
 
 echo;
@@ -142,6 +158,14 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<a href="?p=overview
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<a href="?p=details&n=2&i=2">Következő</a>';
+	then echo ' - OK   :   possible to move focus to next picture' ; let nOK++;
+	else echo ' - Wrong: impossible to move focus to next picture' ; status=Wrong;
+fi; let nAll++;
+if ! curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<a href="[^"*]">Előző</a>';
+	then echo ' - OK   : impossible to move focus to previous picture' ; let nOK++;
+	else echo ' - Wrong:   possible to move focus to previous picture' ; status=Wrong;
+fi; let nAll++;
 
 echo;
 
@@ -166,6 +190,14 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<a href="?p=overview
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<a href="?p=details&n=2&i=1">Előző</a>';
+	then echo ' - OK   :   possible to move focus to previous picture' ; let nOK++;
+	else echo ' - Wrong: impossible to move focus to previous picture' ; status=Wrong;
+fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<a href="?p=details&n=2&i=3">Következő</a>';
+	then echo ' - OK   :   possible to move focus to next picture' ; let nOK++;
+	else echo ' - Wrong: impossible to move focus to next picture' ; status=Wrong;
+fi; let nAll++;
 
 echo;
 
@@ -189,6 +221,14 @@ fi; let nAll++;
 if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<a href="?p=overview&n=2">60s</a>';
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
+fi; let nAll++;
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<a href="?p=details&n=2&i=2">Előző</a>';
+	then echo ' - OK   :   possible to move focus to previous picture' ; let nOK++;
+	else echo ' - Wrong: impossible to move focus to previous picture' ; status=Wrong;
+fi; let nAll++;
+if ! curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<a href="[^"]*">Következő</a>';
+	then echo ' - OK   : impossible to move focus to next picture' ; let nOK++;
+	else echo ' - Wrong:   possible to move focus to next picture' ; status=Wrong;
 fi; let nAll++;
 
 echo;
