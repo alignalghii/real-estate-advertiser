@@ -6,7 +6,8 @@ switch ($p) {
 	case 'overview':
 		require 'controller/overview.php';
 		$n = (int) ($_GET['n'] ?? 1);
-		$controller = new OverviewController($n);
+		$i = (int) ($_GET['i'] ?? 1);
+		$controller = new OverviewController($n, $i);
 		break;
 	case 'details':
 		require 'controller/details.php';

@@ -14,7 +14,7 @@
 <br/>
 <a href="?n=<?php echo $n<$numberOfFlats ? $n+1 : 1; ?>">15s</a>
 <br/>
-<a href="?p=details&n=<?php echo $n; ?>&i=1">Click for details!</a>
+<a href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i; ?>">Click for details!</a>
 <br/>
 <?php echo $flats[$n-1]['address']; ?>
 <ul>

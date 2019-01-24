@@ -1,8 +1,8 @@
 <link rel="stylesheet" type="text/css" href="gallery.css"/>
 <link rel="stylesheet" type="text/css" href="navigation.css"/>
-<a href="?p=overview&n=<?php echo $n; ?>">Áttekintéshez vissza</a>
+<a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">Áttekintéshez vissza</a>
 <br/>
-<a href="?p=overview&n=<?php echo $n; ?>">60s</a>
+<a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">60s</a>
 <br/>
 <?php if ($i > 1): ?>
 	<a href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i-1; ?>">Előző</a>
