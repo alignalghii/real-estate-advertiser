@@ -7,3 +7,4 @@
  - Details page has also a timed event to return to the overview page, not only the explicit linking back.
  - Error pages should provide explanation, at least in the development version.
  - Later, on error pages, make difference between user-visible conseiling vs developer-used logging.
+ - Only blur/make faint unused navigation buttons Prev/Next, do not it missing completely. (`webtest.bash` must be adjusted accordingly.)

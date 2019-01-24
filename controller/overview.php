@@ -14,9 +14,10 @@ class OverviewController
 		$n = $this->n;
 		if (1 <= $n && $n <= $numberOfFlats) {
 			echo '<link rel="stylesheet" type="text/css" href="gallery.css"/>';
-			if ($n > 1)              echo '<a href="?n='.($n-1).'">Előző</a>';
+			echo '<link rel="stylesheet" type="text/css" href="navigation.css"/>';
+			echo $n > 1 ? '<a href="?n='.($n-1).'">Előző</a>' : '<span class="faint">Előző</span>';
 			echo '<br/>';
-			if ($n < $numberOfFlats) echo '<a href="?n='.($n+1).'">Következő</a>';
+			echo $n < $numberOfFlats ? '<a href="?n='.($n+1).'">Következő</a>' : '<span class="faint">Következő</span>';
 			echo '<br/>';
 			echo '<a href="?n='.($n<$numberOfFlats ? $n+1 : 1).'">15s</a>';
 			echo '<br/>';
