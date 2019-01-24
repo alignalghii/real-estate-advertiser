@@ -10,3 +10,4 @@
  - Only blur/make faint unused navigation buttons Prev/Next, do not it missing completely. (`webtest.bash` must be adjusted accordingly.)
  - Error pages should have paramers (p, n, i) to be able to return to the caller/triggerer page
  - Parameter `p` is defaulted to overview, `n` and `i` parameters are defaulted to 1. The latter two defaultings can be probelmatic when the database is not yet loaded.
+ - The viewmodels of controllers Overview and Details are unnecessarily complicated, they should be trimmed.
