@@ -15,7 +15,7 @@
 		</ul>
 		<h1>Ingatlanhirdető | Részletek</h1>
 		<img class="big" src="<?php echo "$n/{$pictures[$i0]['filename']}"; ?>"/>
-		<ul>
+		<ul class="icon-line">
 <?php foreach ($pictures as $running => $picture): $class = $running == $i0 ? 'small-focused' : 'small'; ?>
 			<li><img class="<?php echo $class; ?>" src="<?php echo "$n/{$pictures[$running]['filename']}"; ?>"/></li>
 <?php endforeach; ?>

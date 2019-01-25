@@ -15,3 +15,4 @@
  - Images: instead of small-small-big-small-small, it should be big-NEWDIV-small-small-raisedsmall-small-small
  - In script `webtest.bash`, all labels `' - OK'` should be corrected: `' + OK'`
  - Use HTML5's specific tags as `navigation` instead of `<div class="navigation">`
+ - Optimize/simplify/unify CSS for horizontal menu/icon lists: they are implemented twice, once for menu (`navigation.css`: `class="navigation"`), second for icon lists (`gallery.css`: `class="icon-line"`).
