@@ -11,3 +11,4 @@
  - Error pages should have paramers (p, n, i) to be able to return to the caller/triggerer page
  - Parameter `p` is defaulted to overview, `n` and `i` parameters are defaulted to 1. The latter two defaultings can be probelmatic when the database is not yet loaded.
  - The viewmodels of controllers Overview and Details are unnecessarily complicated, they should be trimmed.
+ - Check HTML validness with lint, also do SEO, at least give all images an `alt` description.
