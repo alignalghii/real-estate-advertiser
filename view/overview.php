@@ -17,9 +17,9 @@
 		<h1>Ingatlanhirdető | Áttekintés</h1>
 		<div class="container">
 			<div class="column-left">
-				<h2>Adatok</h2>
+				<h2>Adatsor #<?php echo $n; ?></h2>
 				<ul>
-					<li><?php echo $flats[$n-1]['address']; ?></li>
+					<li>Cím: <?php echo $flats[$n-1]['address']; ?></li>
 				</ul>
 			</div>
 			<div class="column-center">
