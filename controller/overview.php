@@ -1,6 +1,7 @@
 <?php
 
 require 'Model.php';
+require 'Helper.php';
 
 class OverviewController
 {
