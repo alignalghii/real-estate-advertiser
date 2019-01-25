@@ -18,6 +18,7 @@ class DetailsController
 			$pictures         = Model::picturesOfFlat($n);
 			$numberOfPictures = count($pictures);
 			if (1 <= $i && $i <= $numberOfPictures) {
+				$i0 = $i-1;
 				require 'view/details.php';
 			} else {
 				echo "Error: wrong index for picture";

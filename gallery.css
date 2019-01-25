@@ -1,5 +1,11 @@
 img.small {
-	border: 1px solid #ddd;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+img.small-focused {
+	border: 1px solid black;
 	border-radius: 4px;
 	padding: 5px;
 }
@@ -11,7 +17,7 @@ img.half {
 }
 
 img.big {
-	border: 1px solid black;
-	border-radius: 4px;
-	padding: 5px;
+	border: 5px solid black;
+	border-radius: 6px;
+	padding: 10px;
 }
