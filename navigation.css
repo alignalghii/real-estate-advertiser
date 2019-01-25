@@ -1,3 +1,13 @@
 span.faint {
 	color: gray;
 }
+
+ul.navigation li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 20px;
+}
+
+ul.navigation a[href] {
+	background-color: lightgreen;
+}

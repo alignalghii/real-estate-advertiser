@@ -7,14 +7,12 @@
 		<title>Részletek</title>
 	</head>
 	<body>
-		<div class="navigation">
-			<ul>
-				<li><?php if ($i > 1): ?><a href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i-1; ?>">Előző</a><?php else: ?><span class="faint">Előző</span><?php endif; ?></li>
-				<li><?php if ($i < $numberOfPictures): ?><a href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i+1; ?>">Következő</a><?php else: ?><span class="faint">Következő</span><?php endif; ?></li>
-				<li><a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">Áttekintéshez vissza</a></li>
-				<li><a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">60s</a></li>
-			</ul>
-		</div>
+		<ul class="navigation">
+			<li><a <?php if ($i > 1                ): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i-1; ?>"<?php else: ?>class="faint"<?php endif; ?>>Előző</a></li>
+			<li><a <?php if ($i < $numberOfPictures): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i+1; ?>"<?php else: ?>class="faint"<?php endif; ?>>Következő</a></li>
+			<li><a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">Áttekintéshez vissza</a></li>
+			<li><a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">60s</a></li>
+		</ul>
 		<h1>Ingatlanhirdető | Részletek</h1>
 		<img class="big" src="<?php echo "$n/{$pictures[$i0]['filename']}"; ?>"/>
 		<ul>
