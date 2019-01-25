@@ -1,5 +1,6 @@
-span.faint {
-	color: gray;
+a.faint {
+	color: #666;
+	background-color: #ddd;
 }
 
 ul.navigation li {
