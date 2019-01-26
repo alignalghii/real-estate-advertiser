@@ -9,7 +9,8 @@ echo '### OVERVIEW ###';
 echo;
 
 echo '## No GET param ##';
-if   curl -sS localhost:8000     | grep -q '<a href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000     | grep -q '<a class="timer" data-interval="15" href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000     | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if   curl -sS localhost:8000     | grep -q '<a href="?n=2">.\{0,33\}Következő</a>'   ; then echo ' + OK   : it can proceed to second'     ; let nOK++; else echo ' - Wrong: it cannot proceed to second'    ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000     | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Előző</a>'; then echo ' + OK   : there is no prevpage indeed'  ; let nOK++; else echo ' - Wrong: it thinks there is a prev page' ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000     | grep -q 'Vörös'                       ; then echo ' + OK   : found   expected address 1'   ; let nOK++; else echo ' - Wrong: avoid   expected address 1'     ; status=Wrong; fi; let nAll++;
@@ -26,7 +27,8 @@ fi; let nAll++;
 echo;
 
 echo '## n = 1 ##';
-if   curl -sS localhost:8000?n=1 | grep -q '<a href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=1 | grep -q '<a class="timer" data-interval="15" href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=1 | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if   curl -sS localhost:8000?n=1 | grep -q '<a href="?n=2">.\{0,33\}Következő</a>'   ; then echo ' + OK   : it can proceed to second'     ; let nOK++; else echo ' - Wrong: it cannot proceed to second'    ; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=1 | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Előző</a>'; then echo ' + OK   : there is no prevpage indeed'  ; let nOK++; else echo ' - Wrong: it thinks there is a prev page' ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000?n=1 | grep -q 'Vörös'                       ; then echo ' + OK   : found   expected address 1'   ; let nOK++; else echo ' - Wrong: avoid   expected address 1'     ; status=Wrong; fi; let nAll++;
@@ -43,7 +45,8 @@ fi; let nAll++;
 echo;
 
 echo '## n = 1 & i = 1 ##';
-if   curl -sS 'localhost:8000?n=1&i=1' | grep -q '<a href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=1&i=1' | grep -q '<a class="timer" data-interval="15" href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=1&i=1' | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if   curl -sS 'localhost:8000?n=1&i=1' | grep -q '<a href="?n=2">.\{0,33\}Következő</a>'   ; then echo ' + OK   : it can proceed to second'     ; let nOK++; else echo ' - Wrong: it cannot proceed to second'    ; status=Wrong; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=1&i=1' | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Előző</a>'; then echo ' + OK   : there is no prevpage indeed'  ; let nOK++; else echo ' - Wrong: it thinks there is a prev page' ; status=Wrong; fi; let nAll++;
 if   curl -sS 'localhost:8000?n=1&i=1' | grep -q 'Vörös'                       ; then echo ' + OK   : found   expected address 1'   ; let nOK++; else echo ' - Wrong: avoid   expected address 1'     ; status=Wrong; fi; let nAll++;
@@ -60,7 +63,8 @@ fi; let nAll++;
 echo;
 
 echo '## n = 1 & i = 2 ##';
-if   curl -sS 'localhost:8000?n=1&i=2' | grep -q '<a href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=1&i=2' | grep -q '<a class="timer" data-interval="15" href="?n=2">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=1&i=2' | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if   curl -sS 'localhost:8000?n=1&i=2' | grep -q '<a href="?n=2">.\{0,33\}Következő</a>'; then echo ' + OK   : it can proceed to second'     ; let nOK++; else echo ' - Wrong: it cannot proceed to second'    ; status=Wrong; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=1&i=2' | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Előző</a>'; then echo ' + OK   : there is no prevpage indeed'  ; let nOK++; else echo ' - Wrong: it thinks there is a prev page' ; status=Wrong; fi; let nAll++;
 if   curl -sS 'localhost:8000?n=1&i=2' | grep -q 'Vörös'                       ; then echo ' + OK   : found   expected address 1'   ; let nOK++; else echo ' - Wrong: avoid   expected address 1'     ; status=Wrong; fi; let nAll++;
@@ -77,7 +81,8 @@ fi; let nAll++;
 echo;
 
 echo '## n = 2 ##';
-if   curl -sS localhost:8000?n=2 | grep -q '<a href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=2 | grep -q '<a class="timer" data-interval="15" href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS localhost:8000?n=2 | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if ! curl -sS localhost:8000?n=2 | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Következő</a>'; then echo ' + OK   : there is no more nextpage'    ; let nOK++; else echo ' - Wrong: it thinks there is a nextpage'  ; status=Wrong; fi; let nAll++;
 if   curl -sS localhost:8000?n=2 | grep -q '<a href="?n=1">.\{0,33\}Előző</a>'      ; then echo ' + OK   : there is a prevpage indeed'   ; let nOK++; else echo ' - Wrong: it thinks there is no prev page'; status=Wrong; fi; let nAll++;
 if ! curl -sS localhost:8000?n=2 | grep -q 'Vörös'                       ; then echo ' + OK   : avoid unexpected address 1'   ; let nOK++; else echo ' - Wrong: found unexpected address 1'     ; status=Wrong; fi; let nAll++;
@@ -94,7 +99,8 @@ fi; let nAll++;
 echo;
 
 echo '## n = 2 & i = 1 ##';
-if   curl -sS 'localhost:8000?n=2&i=1' | grep -q '<a href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=2&i=1' | grep -q '<a class="timer" data-interval="15" href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=2&i=1' | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=2&i=1' | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Következő</a>'; then echo ' + OK   : there is no more nextpage'    ; let nOK++; else echo ' - Wrong: it thinks there is a nextpage'  ; status=Wrong; fi; let nAll++;
 if   curl -sS 'localhost:8000?n=2&i=1' | grep -q '<a href="?n=1">.\{0,33\}Előző</a>'      ; then echo ' + OK   : there is a prevpage indeed'   ; let nOK++; else echo ' - Wrong: it thinks there is no prev page'; status=Wrong; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=2&i=1' | grep -q 'Vörös'                       ; then echo ' + OK   : avoid unexpected address 1'   ; let nOK++; else echo ' - Wrong: found unexpected address 1'     ; status=Wrong; fi; let nAll++;
@@ -111,7 +117,8 @@ fi; let nAll++;
 echo;
 
 echo '## n = 2 & i = 2 ##';
-if   curl -sS 'localhost:8000?n=2&i=2' | grep -q '<a href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=2&i=2' | grep -q '<a class="timer" data-interval="15" href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=2&i=2' | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=2&i=2' | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Következő</a>'; then echo ' + OK   : there is no more nextpage'    ; let nOK++; else echo ' - Wrong: it thinks there is a nextpage'  ; status=Wrong; fi; let nAll++;
 if   curl -sS 'localhost:8000?n=2&i=2' | grep -q '<a href="?n=1">.\{0,33\}Előző</a>'      ; then echo ' + OK   : there is a prevpage indeed'   ; let nOK++; else echo ' - Wrong: it thinks there is no prev page'; status=Wrong; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=2&i=2' | grep -q 'Vörös'                       ; then echo ' + OK   : avoid unexpected address 1'   ; let nOK++; else echo ' - Wrong: found unexpected address 1'     ; status=Wrong; fi; let nAll++;
@@ -128,7 +135,8 @@ fi; let nAll++;
 echo;
 
 echo '## n = 2 & i = 3 ##';
-if   curl -sS 'localhost:8000?n=2&i=3' | grep -q '<a href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=2&i=3' | grep -q '<a class="timer" data-interval="15" href="?n=1">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the first again/rep' ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
+if   curl -sS 'localhost:8000?n=2&i=3' | grep -q '<script src="timer.js"></script>' && test -f timer.js; then echo ' + OK   : JS   loadable for 15s-timer'; let nOK++; else echo ' - Wrong: JS unloadable for 15s-timer'; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=2&i=3' | grep -q '<a href="?n=[0-9]\+">.\{0,33\}Következő</a>'; then echo ' + OK   : there is no more nextpage'    ; let nOK++; else echo ' - Wrong: it thinks there is a nextpage'  ; status=Wrong; fi; let nAll++;
 if   curl -sS 'localhost:8000?n=2&i=3' | grep -q '<a href="?n=1">.\{0,33\}Előző</a>'      ; then echo ' + OK   : there is a prevpage indeed'   ; let nOK++; else echo ' - Wrong: it thinks there is no prev page'; status=Wrong; fi; let nAll++;
 if ! curl -sS 'localhost:8000?n=2&i=3' | grep -q 'Vörös'                       ; then echo ' + OK   : avoid unexpected address 1'   ; let nOK++; else echo ' - Wrong: found unexpected address 1'     ; status=Wrong; fi; let nAll++;

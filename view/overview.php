@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="gallery.css"/>
 		<link rel="stylesheet" type="text/css" href="navigation.css"/>
 		<link rel="stylesheet" type="text/css" href="layout.css"/>
+		<script src="timer.js"></script>
 		<title>Ingatlanhirdető | Áttekintés</title>
 	</head>
 	<body>
@@ -12,7 +13,7 @@
 			<li><a <?php if ($n > 1             ): ?>href="?n=<?php echo $n-1; ?>"<?php else: ?>class="faint"<?php endif; ?>>← Előző</a></li>
 			<li><a <?php if ($n < $numberOfFlats): ?>href="?n=<?php echo $n+1; ?>"<?php else: ?>class="faint"<?php endif; ?>>→ Következő</a></li>
 			<li><a href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i; ?>">🔍 Részletes képgaléria</a></li>
-			<li><a href="?n=<?php echo $n<$numberOfFlats ? $n+1 : 1; ?>">↻ Körbehalad</a></li>
+			<li><a class="timer" data-interval="15" href="?n=<?php echo $n<$numberOfFlats ? $n+1 : 1; ?>">↻ Körbehalad</a></li>
 		</ul>
 		<h1>Ingatlanhirdető | Áttekintés</h1>
 		<div class="container">
