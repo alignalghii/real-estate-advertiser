@@ -187,11 +187,11 @@ if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 1:2'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 1:2'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<a href="?p=overview&n=1">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<a class="timer" data-interval="60" href="?p=overview&n=1">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
 	then echo ' - OK   :   possible to go return to overview'; let nOK++;
 	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<a href="?p=overview&n=1">60s</a>';
+if   curl -sS 'localhost:8000?p=details&n=1&i=1' | grep -q '<script src="timer.js"></script>' && test -f timer.js; # <a href="?p=overview&n=1">↑🌐 Áttekintéshez vissza</a>
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
@@ -219,11 +219,11 @@ if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<img class="small-fo
 	then echo ' - OK   : found expected focus pic 1:2'; let nOK++;
 	else echo ' - Wrong: avoid expected focus pic 1:2'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<a href="?p=overview&n=1&i=2">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<a class="timer" data-interval="60" href="?p=overview&n=1&i=2">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
 	then echo ' - OK   :   possible to go return to overview'; let nOK++;
 	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<a href="?p=overview&n=1&i=2">60s</a>';
+if   curl -sS 'localhost:8000?p=details&n=1&i=2' | grep -q '<script src="timer.js"></script>' && test -f timer.js; # <a href="?p=overview&n=1&i=2">↑🌐 Áttekintéshez vissza</a>
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
@@ -264,11 +264,11 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 2:3'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 2:3'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<a href="?p=overview&n=2">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<a class="timer" data-interval="60" href="?p=overview&n=2">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
 	then echo ' - OK   :   possible to go return to overview'; let nOK++;
 	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<a href="?p=overview&n=2">60s</a>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=1' | grep -q '<script src="timer.js"></script>' && test -f timer.js; # <a href="?p=overview&n=2">↑🌐 Áttekintéshez vissza</a>
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
@@ -300,11 +300,11 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<img class="small" s
 	then echo ' - OK   : found expected small pic 2:3'; let nOK++;
 	else echo ' - Wrong: avoid expected small pic 2:3'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<a href="?p=overview&n=2&i=2">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<a class="timer" data-interval="60" href="?p=overview&n=2&i=2">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
 	then echo ' - OK   :   possible to go return to overview'; let nOK++;
 	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<a href="?p=overview&n=2&i=2">60s</a>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=2' | grep -q '<script src="timer.js"></script>' && test -f timer.js; # <a href="?p=overview&n=2&i=2">↑🌐 Áttekintéshez vissza</a>
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
@@ -336,11 +336,11 @@ if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<img class="small-fo
 	then echo ' - OK   : found expected focus pic 2:3'; let nOK++;
 	else echo ' - Wrong: avoid expected focus pic 2:3'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<a href="?p=overview&n=2&i=3">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<a class="timer" data-interval="60" href="?p=overview&n=2&i=3">.\{0,33\}[Áá]ttekintéshez vissza.\{0,22\}</a>';
 	then echo ' - OK   :   possible to go return to overview'; let nOK++;
 	else echo ' - Wrong: impossible to go return to overview'; status=Wrong;
 fi; let nAll++;
-if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<a href="?p=overview&n=2&i=3">60s</a>';
+if   curl -sS 'localhost:8000?p=details&n=2&i=3' | grep -q '<script src="timer.js"></script>' && test -f timer.js; # <a href="?p=overview&n=2&i=3">↑🌐 Áttekintéshez vissza</a>
 	then echo ' - OK   : 60s-timer to return to overview'   ; let nOK++;
 	else echo ' - Wrong: No 60s-timer to return to overview'; status=Wrong;
 fi; let nAll++;
