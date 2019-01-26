@@ -8,9 +8,9 @@
 	</head>
 	<body>
 		<ul class="navigation">
-			<li><a <?php if ($i > 1                ): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i-1; ?>"<?php else: ?>class="faint"<?php endif; ?>>Előző</a></li>
-			<li><a <?php if ($i < $numberOfPictures): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i+1; ?>"<?php else: ?>class="faint"<?php endif; ?>>Következő</a></li>
-			<li><a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">Áttekintéshez vissza</a></li>
+			<li><a <?php if ($i > 1                ): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i-1; ?>"<?php else: ?>class="faint"<?php endif; ?>>← Előző</a></li>
+			<li><a <?php if ($i < $numberOfPictures): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i+1; ?>"<?php else: ?>class="faint"<?php endif; ?>>→ Következő</a></li>
+			<li><a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">↑🌐 Áttekintéshez vissza</a></li>
 			<li><a href="?p=overview&n=<?php echo $n; if ($i != 1) echo "&i=$i"; ?>">60s</a></li>
 		</ul>
 		<h1>Ingatlanhirdető | Részletek</h1>
