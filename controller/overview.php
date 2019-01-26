@@ -12,19 +12,27 @@ class OverviewController
 	public function index()
 	{
 		$numberOfFlats = Model::numberOfFlats();
-		$n = $this->n;
-		$i = $this->i;
-		if (1 <= $n && $n <= $numberOfFlats) {
-			$flats = Model::allFlats();
-			$pictures  = Model::picturesOfFlat($n);
-			$numberOfPictures = count($pictures);
-			if (1 <= $i && $i <= $numberOfPictures) {
-				require 'view/overview.php';
+		if ($numberOfFlats > 0) {
+			$n = $this->n;
+			$i = $this->i;
+			if (1 <= $n && $n <= $numberOfFlats) {
+				$flats = Model::allFlats();
+				$pictures  = Model::picturesOfFlat($n);
+				$numberOfPictures = count($pictures);
+				if ($numberOfPictures > 0) {
+					if (1 <= $i && $i <= $numberOfPictures) {
+						require 'view/overview.php';
+					} else {
+						echo 'Error: wrong index number for picture';
+					}
+				} else {
+					echo sprintf("Error: no images for flat #%d", $n);
+				}
 			} else {
-				echo 'Error: wrong index number for picture';
+				echo 'Error: wrong index number for flat record';
 			}
 		} else {
-			echo 'Error: wrong index number for flat record';
+			echo 'Error: no flat records';
 		}
 	}
 }

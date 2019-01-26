@@ -16,3 +16,9 @@
  - In script `webtest.bash`, all labels `' - OK'` should be corrected: `' + OK'`
  - Use HTML5's specific tags as `navigation` instead of `<div class="navigation">`
  - Optimize/simplify/unify CSS for horizontal menu/icon lists: they are implemented twice, once for menu (`navigation.css`: `class="navigation"`), second for icon lists (`gallery.css`: `class="icon-line"`).
+ - Better order for navigation icons: overview (prev, next, round, details), details (prev, next, -SPACE-, back-to-overview).
+ - Refactor `webtest.bash`: remove redundancy, use loops, (associative) arrays and functions.
+ - Use more portable JavaScript techniques, not too brandnew ones: `for(;;)` instead of `for/of`, and `window.location` instead of `link.click()`, maybe also rough `window.onload` instead of sophisticated imitations of `document.ready`.
+ - JavaScript testing with PhantomJS, Karma
+ - Type info for function (forgotten at contructors and controller methods)
+ - No handling for case when database connection is OK but no tables are created yet. Also consider handling of wrong connection, or existing but empty tables.
