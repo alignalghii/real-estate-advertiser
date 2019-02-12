@@ -5,7 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="gallery.css"/>
 		<link rel="stylesheet" type="text/css" href="navigation.css"/>
 		<script src="timer.js"></script>
-		<title>Részletek</title>
+		<title>Ingatlanhirdető | Részletek</title>
 	</head>
 	<body>
 		<ul class="navigation">
