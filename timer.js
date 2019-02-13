@@ -13,7 +13,12 @@ function main()
 	var timerLinks = document.getElementsByClassName('timer');
 	for (let timerLink of timerLinks) {
 		var intervalMS = 1000 * timerLink.dataset.interval;
-		function jump() {timerLink.click();}
-		setInterval(jump, intervalMS)
+		setInterval(click, intervalMS, timerLink);
 	}
+}
+
+function click(element) { // Portability to PhantomJS?
+	element.click();
+	//var clickE = new MouseEvent('click', {bubbles: true, cancelable: true, view: window});
+	//element.dispatchEvent(clickE);
 }
