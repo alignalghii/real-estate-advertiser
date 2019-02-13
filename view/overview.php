@@ -17,7 +17,7 @@
 		</ul>
 		<h1>Ingatlanhirdető | Áttekintés</h1>
 		<div class="container">
-			<div class="column-left">
+			<div class="column-left" id="flat-record" data-flat-record-index="<?php echo $n; ?>" data-number-of-flats="<?php echo $numberOfFlats; ?>">
 				<h2>Adatsor #<?php echo $n; ?></h2>
 				<ul>
 					<li>Cím: <?php echo $flats[$n-1]['address']; ?></li>
