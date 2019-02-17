@@ -1,4 +1,4 @@
 INSERT INTO `flat`
-(`id`, `address`     ) VALUES
-(  1 , 'Vörös u. 99' ),
-(  2 , 'Őzes út  67' );
+(`id`, `order`, `address`     ) VALUES
+(100 ,  1     , 'Vörös u. 99' ),
+(200 ,  2     , 'Őzes út  67' );

@@ -4,7 +4,10 @@ require_once 'Config.php';
 
 class Db
 {
-	public static function query(string $sql, array $bindings = []): array
+	public  static function queryOne(string $sql, array $bindings = []): ?array {return self::queryOneOrAll(true , $sql, $bindings);}
+	public  static function queryAll(string $sql, array $bindings = []):  array {return self::queryOneOrAll(false, $sql, $bindings);}
+
+	private static function queryOneOrAll(bool $oneOrAll, string $sql, array $bindings = []): ?array
 	{
 		$dns = sprintf('mysql:host=%s;dbname=%s;charset=utf8', Config::DB_HOST, Config::DB_NAME);
 		$pdo = new PDO($dns, Config::DB_USER, Config::DB_PASSWORD);
@@ -13,6 +16,7 @@ class Db
 			$st->bindValue($marker, $value, $pdoType);
 		}
 		$status = $st->execute();
-		return $st->fetchAll(PDO::FETCH_ASSOC);
+		return $oneOrAll ? ($st->fetch   (PDO::FETCH_ASSOC) ?: null)
+		                 :  $st->fetchAll(PDO::FETCH_ASSOC)         ;
 	}
 }

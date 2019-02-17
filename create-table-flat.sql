@@ -1,5 +1,7 @@
 CREATE TABLE `flat` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+	`id`      INT          NOT NULL AUTO_INCREMENT,
 	`address` VARCHAR(256) NOT NULL,
-	PRIMARY KEY (`id`)
+	`order`   INT          NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE  KEY (`order`)
 );

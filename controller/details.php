@@ -7,24 +7,34 @@ class DetailsController
 	private $n;
 	private $i;
 
-	public function __construct(int $n, int $i) {$this->n = $n; $this->i = $i;}
+	public function __construct(?int $n, ?int $i) {$this->n = $n; $this->i = $i;}
 
 	public function index()
 	{
 		$n = $this->n;
 		$i = $this->i;
-		$numberOfFlats    = Model::numberOfFlats();
-		if (1 <= $n && $n <= $numberOfFlats) {
-			$pictures         = Model::picturesOfFlat($n);
-			$numberOfPictures = count($pictures);
-			if (1 <= $i && $i <= $numberOfPictures) {
-				$i0 = $i-1;
-				require 'view/details.php';
+
+		if (!$n) $n = Model::overviewFirstFlat();
+		if ($n) {
+			if (!$i) $i = Model::overviewFirstPic($n);
+			if ($i) {
+				$match = Model::overviewMatchPic($n, $i);
+				if ($match) {
+					$pictures      = Model::detailsPicturesOfFlat($n, $i);
+					$detailsPicNav = Model::detailsPicNav($i);
+					extract($detailsPicNav); // $prev, $next, $first
+					require 'view/details.php';
+				} else {
+					$errorMsg = "Error: Mismatch between flat index $n and picture index $i";
+					require 'view/error.php';
+				}
 			} else {
-				echo "Error: wrong index for picture";
+				$errorMsg = "Error: No pictures for flat index $n";
+				require 'view/error.php';
 			}
 		} else {
-			echo "Error: wrong index for flat record";
+			$errorMsg = 'No flats';
+			require 'view/error.php';
 		}
 	}
 }

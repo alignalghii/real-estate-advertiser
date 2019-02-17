@@ -3,7 +3,7 @@ domReady(pager);
 function pager()
 {
 	var modelData = document.getElementById('model').dataset;
-	var [numberOfPictures, n, i] = [modelData.numberOfPictures, modelData.n, modelData.i];
+	var [n, i] = [modelData.n, modelData.i];
 
 	var [prevNav, nextNav] = [document.getElementById('prev'), document.getElementById('next')];
 	if (isEnabled(prevNav)) prevNav.addEventListener('click', goPrev);

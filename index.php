@@ -5,14 +5,14 @@ $p = $_GET['p'] ?? 'overview';
 switch ($p) {
 	case 'overview':
 		require 'controller/overview.php';
-		$n = (int) ($_GET['n'] ?? 1);
-		$i = (int) ($_GET['i'] ?? 1);
+		$n = isset($_GET['n']) ? intval($_GET['n']) : null;
+		$i = isset($_GET['i']) ? intval($_GET['i']) : null;
 		$controller = new OverviewController($n, $i);
 		break;
 	case 'details':
 		require 'controller/details.php';
-		$n = (int) ($_GET['n'] ?? 1);
-		$i = (int) ($_GET['i'] ?? 1);
+		$n = isset($_GET['n']) ? intval($_GET['n']) : null;
+		$i = isset($_GET['i']) ? intval($_GET['i']) : null;
 		$controller = new DetailsController($n, $i);
 		break;
 	default:

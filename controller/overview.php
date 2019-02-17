@@ -7,32 +7,33 @@ class OverviewController
 {
 	private $n, $i;
 
-	public function __construct(int $n, int $i) {$this->n = $n; $this->i = $i;}
+	public function __construct(?int $n, ?int $i) {$this->n = $n; $this->i = $i;}
 
 	public function index()
 	{
-		$numberOfFlats = Model::numberOfFlats();
-		if ($numberOfFlats > 0) {
-			$n = $this->n;
-			$i = $this->i;
-			if (1 <= $n && $n <= $numberOfFlats) {
-				$flats = Model::allFlats();
-				$pictures  = Model::picturesOfFlat($n);
-				$numberOfPictures = count($pictures);
-				if ($numberOfPictures > 0) {
-					if (1 <= $i && $i <= $numberOfPictures) {
-						require 'view/overview.php';
-					} else {
-						echo 'Error: wrong index number for picture';
-					}
+		$n = $this->n;
+		$i = $this->i;
+
+		if (!$n || Model::overviewValidFlat($n)) {
+			if (!$n) $n = Model::overviewFirstFlat();
+			if ($n) {
+				if (!$i) $i = Model::overviewFirstPic($n);
+				$match = $i ? Model::overviewMatchPic($n, $i) : true;
+				if ($match) {
+					$overviewData = Model::overviewData($n);
+					extract($overviewData); // $prev, $next, $round, $address, $picture1, $picture2
+					require 'view/overview.php';
 				} else {
-					echo sprintf("Error: no images for flat #%d", $n);
+					$errorMsg = "Error: Mismatch between flat index $n and picture index $i";
+					require 'view/error.php';
 				}
 			} else {
-				echo 'Error: wrong index number for flat record';
+				$errorMsg = 'Error: No flats';
+				require 'view/error.php';
 			}
 		} else {
-			echo 'Error: no flat records';
+			$errorMsg = "Error: Invalid flat index #$n";
+			require 'view/error.php';
 		}
 	}
 }
