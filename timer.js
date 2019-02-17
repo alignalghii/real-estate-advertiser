@@ -1,14 +1,6 @@
-domReady(main);
+domReady(timer);
 
-function domReady(callback)
-{
-	document.addEventListener('DOMContentLoaded', callback);
-	if (document.readyState === 'interactive' || document.readyState === 'complete') {
-		callback();
-	}
-}
-
-function main()
+function timer()
 {
 	var timerLinks = document.getElementsByClassName('timer');
 	for (let timerLink of timerLinks) {
@@ -17,8 +9,4 @@ function main()
 	}
 }
 
-function click(element) { // Portability to PhantomJS?
-	element.click();
-	//var clickE = new MouseEvent('click', {bubbles: true, cancelable: true, view: window});
-	//element.dispatchEvent(clickE);
-}
+

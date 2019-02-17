@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="gallery.css"/>
 		<link rel="stylesheet" type="text/css" href="navigation.css"/>
 		<link rel="stylesheet" type="text/css" href="layout.css"/>
+		<script src="util.js"></script>
 		<script src="timer.js"></script>
 		<title>Ingatlanhirdető | Áttekintés</title>
 	</head>
