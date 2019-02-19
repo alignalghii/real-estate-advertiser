@@ -8,7 +8,7 @@
 		<h1>Ingatlanhirdető | Admin</h1>
 		<ul>
 <?php foreach ($flats as $flat): ?>
-			<li>(<?php echo $flat['order']; ?>) <?php echo $flat['address']; ?></li>
+			<li>(<?php echo $flat['order']; ?>) <?php echo $flat['address']; ?> (Képek száma: <?php echo $flat['pics']; ?> kép)</li>
 <?php endforeach; ?>
 		</ul>
 	</body>

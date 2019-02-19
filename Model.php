@@ -14,6 +14,35 @@ class Model
 		return Db::queryAll('SELECT * FROM `flat` ORDER BY `order`');
 	}
 
+	public static function allFlatsWithPicsAmount(): array
+	{
+		return Db::queryAll('
+			SELECT
+				`f`.*,
+				COUNT(`p`.`id`) AS `pics`
+			FROM      `flat`    AS `f`
+			LEFT JOIN `picture` AS `p` ON `p`.`flat_id` = `f`.`id`
+			GROUP BY `f`.`id`
+			ORDER BY `f`.`order`
+		');
+	}
+
+	public static function allFlatsWithPicsAmount_subq(): array
+	{
+		return Db::queryAll('
+			SELECT
+				*,
+				(
+					SELECT COUNT(*)
+					FROM `picture` AS `p`
+					WHERE `p`.`flat_id` = `flat`.`id`
+				) AS `pics`
+			FROM `flat`
+			ORDER BY `order`
+		');
+	}
+
+
 	public static function detailsPicturesOfFlat(int $flatId): array
 	{
 		$recs = Db::queryAll(

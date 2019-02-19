@@ -6,7 +6,7 @@ class AdminController
 {
 	public function index()
 	{
-		$flats = Model::allFlats();
+		$flats = Model::allFlatsWithPicsAmount();
 		require 'view/admin.php';
 	}
 }
