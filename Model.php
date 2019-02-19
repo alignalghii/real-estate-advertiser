@@ -11,7 +11,7 @@ class Model
 
 	public static function allFlats(): array
 	{
-		return Db::query('SELECT * FROM `flat` ORDER BY `order`');
+		return Db::queryAll('SELECT * FROM `flat` ORDER BY `order`');
 	}
 
 	public static function detailsPicturesOfFlat(int $flatId): array

@@ -392,5 +392,10 @@ if ! curl -sS localhost:8000?p=wrongpage | grep -q '[Kk]örbe'                  
 
 echo;
 
+echo '### ADMIN ###';
+
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+
 echo '=================';
 echo "Σ: $status ($nOK/$nAll)";

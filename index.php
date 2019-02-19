@@ -15,6 +15,10 @@ switch ($p) {
 		$i = isset($_GET['i']) ? intval($_GET['i']) : null;
 		$controller = new DetailsController($n, $i);
 		break;
+	case 'admin':
+		require 'controller/admin.php';
+		$controller = new AdminController;
+		break;
 	default:
 		require 'controller/error.php';
 		$controller = new ErrorController("Error: No such page as [$p]");
