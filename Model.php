@@ -4,9 +4,9 @@ require_once 'Db.php';
 
 class Model
 {
-	public static function numberOfFlats(): int
+	public static function countOfFlats(): int
 	{
-		return Db::query('SELECT COUNT(*) AS `n` FROM `flat`')[0]['n'];
+		return Db::queryOne('SELECT COUNT(*) AS `n` FROM `flat`')['n'];
 	}
 
 	public static function allFlats(): array
@@ -169,5 +169,31 @@ class Model
 			'SELECT `id` FROM `flat` WHERE `id` = :id',
 			[':id' => [$n, \PDO::PARAM_INT]]
 		);
+	}
+
+	public static function swap(string $tableName, string $fieldName, int $swap, int $paws): bool
+	{
+		list($status1, $pdo, $st) = Db::execute(
+			"
+				UPDATE `$tableName`
+				SET `$fieldName` = CASE `$fieldName`
+				                       WHEN :swap THEN -:paws
+				                       WHEN :paws THEN -:swap
+				                   END
+				WHERE `$fieldName` = :swap OR `$fieldName` = :paws
+			",
+			[
+				':swap' => [$swap, \PDO::PARAM_INT],
+				':paws' => [$paws, \PDO::PARAM_INT]
+			]
+		);
+		$status2 = self::absize($tableName, $fieldName);
+		return $status1 && $status2;
+	}
+
+	private static function absize(string $tableName, string $fieldName): bool
+	{
+		list($status, $pdo, $st) = Db::execute("UPDATE `$tableName` SET `$fieldName` = -`$fieldName` WHERE `$fieldName` < 0");
+		return $status;
 	}
 }

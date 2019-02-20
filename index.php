@@ -1,27 +1,42 @@
 <?php
 
-$p = $_GET['p'] ?? 'overview';
+$method = empty($_GET['method']) ? $_SERVER['REQUEST_METHOD'] : $_GET['method'];
+$page   = $_GET['p'] ?? 'overview';
 
-switch ($p) {
-	case 'overview':
+$missingParams = '';
+switch ([$method, $page]) {
+	case ['GET', 'overview']:
 		require 'controller/overview.php';
 		$n = isset($_GET['n']) ? intval($_GET['n']) : null;
 		$i = isset($_GET['i']) ? intval($_GET['i']) : null;
 		$controller = new OverviewController($n, $i);
+		$controller->index();
 		break;
-	case 'details':
+	case ['GET', 'details']:
 		require 'controller/details.php';
 		$n = isset($_GET['n']) ? intval($_GET['n']) : null;
 		$i = isset($_GET['i']) ? intval($_GET['i']) : null;
 		$controller = new DetailsController($n, $i);
+		$controller->index();
 		break;
-	case 'admin':
+	case ['GET', 'admin']:
 		require 'controller/admin.php';
 		$controller = new AdminController;
+		$controller->index();
 		break;
+	case ['POST', 'admin']:
+		if (isset($_POST['swap']) && isset($_POST['paws']) && intval($_POST['swap']) > 0 && intval($_POST['paws']) > 0) { 
+			require 'controller/admin.php';
+			$swap = intval($_POST['swap']);
+			$paws = intval($_POST['paws']);
+			$controller = new AdminController;
+			$controller->swap($swap, $paws);
+			break;
+		} else {
+			$missingParams = '`swap` and/or `paws`';
+		}
 	default:
 		require 'controller/error.php';
-		$controller = new ErrorController("Error: No such page as [$p]");
+		$controller = new ErrorController("Error: No such route as [$method $page], or problems with some other parameters [$missingParams]");
+		$controller->index();
 }
-
-$controller->index();

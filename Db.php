@@ -9,6 +9,13 @@ class Db
 
 	private static function queryOneOrAll(bool $oneOrAll, string $sql, array $bindings = []): ?array
 	{
+		list ($_, $_, $st) = self::execute($sql, $bindings);
+		return $oneOrAll ? ($st->fetch   (PDO::FETCH_ASSOC) ?: null)
+		                 :  $st->fetchAll(PDO::FETCH_ASSOC)         ;
+	}
+
+	public static function execute(string $sql, array $bindings = []): array
+	{
 		$dns = sprintf('mysql:host=%s;dbname=%s;charset=utf8', Config::DB_HOST, Config::DB_NAME);
 		$pdo = new PDO($dns, Config::DB_USER, Config::DB_PASSWORD);
 		$st = $pdo->prepare($sql);
@@ -16,7 +23,6 @@ class Db
 			$st->bindValue($marker, $value, $pdoType);
 		}
 		$status = $st->execute();
-		return $oneOrAll ? ($st->fetch   (PDO::FETCH_ASSOC) ?: null)
-		                 :  $st->fetchAll(PDO::FETCH_ASSOC)         ;
+		return [$status, $pdo, $st];
 	}
 }
