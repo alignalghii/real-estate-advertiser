@@ -6,5 +6,9 @@ class ErrorController
 
 	public function __construct(string $message) {$this->message = $message;}
 
-	public function index() {echo $this->message;}
+	public function index()
+	{
+		$errorMsg = $this->message;
+		require 'view/error.php';
+	}
 }
