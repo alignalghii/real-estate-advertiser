@@ -1,6 +1,7 @@
 <?php
 
 require 'Model.php';
+require 'Icon.php';
 
 class AdminController
 {

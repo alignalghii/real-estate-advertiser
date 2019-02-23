@@ -1,5 +1,7 @@
 <?php
 
+require 'Icon.php';
+
 class ErrorController
 {
 	private $message;
@@ -8,7 +10,8 @@ class ErrorController
 
 	public function index()
 	{
-		$errorMsg = $this->message;
+		$errorMsg  = $this->message;
+		$backlinks = ['⚙ Kezelői felület' => '?p=admin', Icon::USER.' Felhasználói felület' => '?p=overview'];
 		require 'view/error.php';
 	}
 }
