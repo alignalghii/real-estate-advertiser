@@ -12,3 +12,11 @@ ul.navigation li {
 ul.navigation a[href] {
 	background-color: lightgreen;
 }
+
+svg {
+	width:15px;
+	height:15px;
+	stroke-width:10;
+	stroke:black;
+	fill:transparent;
+}

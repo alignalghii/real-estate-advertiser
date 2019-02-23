@@ -3,9 +3,19 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<link rel="stylesheet" href="general.css"/>
+		<link rel="stylesheet" href="navigation.css"/>
 		<title>Ingatlanhirdető | Admin</title>
 	</head>
 	<body>
+		<ul class="navigation">
+			<li>
+				<a href="/"><svg viewbox="0 0 150 300"><!-- and also for `svg` in `navigation.css`, credit to [Niels Keurentjes](https://stackoverflow.com/a/33253619) -->
+					<circle cx="75" cy="55" r="50" />
+					<path d="M75,105 L75,200 L25,300 M75,200 L125,300 M0,150 L150,150"></path>
+				</svg>
+				Felhasználói felület</a>
+			</li>
+		</ul>
 		<h1>Ingatlanhirdető | Admin</h1>
 		<ul>
 <?php foreach ($flats as $flat): ?>

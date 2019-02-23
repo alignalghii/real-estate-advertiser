@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<ul class="navigation">
+			<li><a href="?p=admin">⚙ Kezelői felület</a></li>
 			<li><a <?php if ($prev): ?>href="?n=<?php echo $prev; ?>"<?php else: ?>class="faint"<?php endif; ?>>← Előző</a></li>
 			<li><a <?php if ($next): ?>href="?n=<?php echo $next; ?>"<?php else: ?>class="faint"<?php endif; ?>>→ Következő</a></li>
 			<li><a <?php if ($i): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $i; ?>"<?php else: ?>class="faint"<?php endif; ?>>🔍 Részletes képgaléria</a></li>

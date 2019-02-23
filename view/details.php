@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<ul class="navigation" id="model" data-n="<?php echo $n?>" data-i="<?php echo $i?>">
+			<li><a href="?p=admin">⚙ Kezelői felület</a></li>
 			<li><a id="prev" <?php if ($prev): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $prev; ?>"<?php else: ?>class="faint"<?php endif; ?>>← Előző</a></li>
 			<li><a id="next" <?php if ($next): ?>href="?p=details&n=<?php echo $n; ?>&i=<?php echo $next; ?>"<?php else: ?>class="faint"<?php endif; ?>>→ Következő</a></li>
 			<li><a id="over" class="timer" data-interval="60" href="?p=overview&n=<?php echo $n; if ($i != $first) echo "&i=$i"; ?>">↑🌐 Áttekintéshez vissza</a></li>
