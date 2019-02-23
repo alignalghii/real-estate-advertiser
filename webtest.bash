@@ -394,38 +394,38 @@ echo;
 
 echo '### ADMIN ###';
 
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
-if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q 'Sikeresen felcseréltem'; then echo ' + OK   : order updater'; let nOK++; else echo ' - Wrong: order updater failed'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
-if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q 'Sikeresen felcseréltem'; then echo ' + OK   : order updater'; let nOK++; else echo ' - Wrong: order updater failed'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q 'Sikeresen felcseréltem'; then echo ' + OK   : order updater'; let nOK++; else echo ' - Wrong: order updater failed'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q 'Sikeresen felcseréltem'; then echo ' + OK   : order updater'; let nOK++; else echo ' - Wrong: order updater failed'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
-if curl -sS -d swap=1 -d paws=1 'localhost:8000?p=admin' | grep -q '[Kk]ülönböző'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+if curl -sS -d swap=1 -d paws=1 'localhost:8000?p=admin' | grep -q '[Kk]ülönböző'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
-if curl -sS -d swap=2 -d paws=2 'localhost:8000?p=admin' | grep -q '[Kk]ülönböző'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+if curl -sS -d swap=2 -d paws=2 'localhost:8000?p=admin' | grep -q '[Kk]ülönböző'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
-if curl -sS -d swap=0 -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+if curl -sS -d swap=0 -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
-if curl -sS -d swap=3 -d paws=1 'localhost:8000?p=admin' | grep -q '[Ll]étező'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+if curl -sS -d swap=3 -d paws=1 'localhost:8000?p=admin' | grep -q '[Ll]étező'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
-if curl -sS -d swap='' -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+if curl -sS -d swap='' -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
-if curl -sS            -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; fi; let nAll++;
+if curl -sS            -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 
 echo '=================';
