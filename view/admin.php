@@ -23,6 +23,7 @@
 				<option value="<?php echo $flat['order']; ?>"<?php if($mode == 'swap' && $flat['order'] == $paws): ?> selected<?php endif; ?>>(<?php echo $flat['order']; ?>) #<?php echo $flat['id']; ?>: <?php echo $flat['address']; ?></option>
 <?php endforeach; ?>
 			</select>
+			<a href="?p=admin">Újratölt</a>
 			<input type="submit" name="submit_swap" value="Cserélj!"/>
 <?php if ($mode == 'swap'): ?>
 			<span class="<?php echo $status ? 'OK' : 'error'; ?>"><?php echo $message; ?></span>
