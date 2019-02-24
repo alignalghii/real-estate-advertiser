@@ -3,7 +3,7 @@
 $method = empty($_GET['method']) ? $_SERVER['REQUEST_METHOD'] : $_GET['method'];
 $page   = $_GET['p'] ?? 'overview';
 
-$missingParams = '';
+$missingParams = [];
 switch ([$method, $page]) {
 	case ['GET', 'overview']:
 		require 'controller/overview.php';
@@ -32,11 +32,19 @@ switch ([$method, $page]) {
 			$controller = new AdminController;
 			$controller->swap($swap, $paws);
 			break;
+		} elseif (isset($_GET['resource']) && $_GET['resource'] == 'flats' && isset($_POST['address'])) {
+			$missingParams[] = 'POST `swap=<int> paws=<int>`';
+			require 'controller/admin.php';
+			$address    = $_POST['address'];
+			$controller = new AdminController;
+			$controller->insertFlat($address);
+			break;
 		} else {
-			$missingParams = '`swap` and/or `paws`';
+			$missingParams[] = 'QUERYSTRING `resource=flats` and `POST address=<string>`';
 		}
 	default:
 		require 'controller/error.php';
+		$missingParams = implode(', OR ', $missingParams);
 		$controller = new ErrorController("Error: No such route as [$method $page], or problems with some other parameters [$missingParams]");
 		$controller->index();
 }

@@ -196,4 +196,17 @@ class Model
 		list($status, $pdo, $st) = Db::execute("UPDATE `$tableName` SET `$fieldName` = -`$fieldName` WHERE `$fieldName` < 0");
 		return $status;
 	}
+
+	public static function insertFlat(string $address): bool
+	{
+		$count = self::countOfFlats();
+		list($status, $pdo, $st) = Db::execute(
+			'INSERT INTO `flat` (`address`, `order`) VALUE (:address, :order)',
+			[
+				':address' => [$address  , \PDO::PARAM_STR],
+				':order'   => [$count + 1, \PDO::PARAM_INT]
+			]
+		);
+		return $status;
+	}
 }

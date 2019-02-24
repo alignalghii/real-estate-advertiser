@@ -457,11 +457,13 @@ if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | gawk '/name="swap"/{m
 if curl -sS                     'localhost:8000?p=admin' | gawk '/name="swap"/{m=1} /name="paws"/{m=2} m==1&&!/selected/&&/\<1\>.*Vörös/{flag1=1} m==2&&!/selected/&&/\<1\>.*Vörös/{flag2=1} END{exit(!(flag1&&flag2));}'; then echo ' + OK   : reorder selections lifted at reload   1'; let nOK++; else echo ' - Wrong: reorder selections not lifted at reload   1'; status=Wrong; fi; let nAll++;
 
 if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 before insertion'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 before insertion'; status=Wrong; fi; let nAll++;
-if curl -isS -d 'address=Majom utca 22' -d 'order=3' 'localhost:8000?p=admin&resource=flats' | gawk '/<.*html.*>/{isBody=1} NR==1&&/201\s+Created/{flagStat=1} !isBody&&/Location: .*n=201.*/{flagLoc=1} END{flag=flagLoc&&flagStat;exit(!flag)}'; then echo ' + OK   : Location header reports and URL referring to a flat #201'; let nOK++; else echo ' - Wrong: No Location header reporting any URL referring to a flat #201'; status=Wrong; fi; let nAll++;
+if curl -isS -d 'address=Majom utca 22' 'localhost:8000?p=admin&resource=flats' | gawk '/<.*html.*>/{isBody=1} NR==1&&/201\s+Created/{flagStat=1} !isBody&&/Location: .*n=201.*/{flagLoc=1} END{flag=flagLoc&&flagStat;exit(!flag)}'; then echo ' + OK   : Location header reports and URL referring to a flat #201'; let nOK++; else echo ' - Wrong: No Location header reporting any URL referring to a flat #201'; status=Wrong; fi; let nAll++;
 if numberOf flat | grep -q '^3$'; then echo ' + OK   : COUNT flat =  3 after insertion, new flat inserted'; let nOK++; else echo ' - Wrong: COUNT flat <> 3 after insertion, no new flat inserted'; status=Wrong; fi; let nAll++;
 reinitDB;
 if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
 
+if curl -isS -d 'address=' 'localhost:8000?p=admin&resource=flats' | grep -q '[Nn]em.*üres'; then echo ' + OK   : Validadation refuses empty address'; let nOK++; else echo ' - Wrong: Validation accepts empty address'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
 
 echo;
 echo '=================';
