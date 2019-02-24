@@ -1,5 +1,21 @@
 #!/bin/bash
 
+function numberOf {
+	mysql -N real_estate_advertiser <<< "SELECT COUNT(*) FROM \`$1\`;";
+}
+
+function reinitDB {
+	{
+		tac dependencies.dat | while read g; do echo "DROP TABLE \`$g\`;"; done;
+		echo;
+		cat dependencies.dat | while read f; do cat "create-table-$f.sql"; done;
+		echo;
+		cat dependencies.dat | while read h; do cat "insert-into-$h.sql" ; done;
+	}\
+	|
+	mysql real_estate_advertiser;
+}
+
 status=OK;
 nOK=0;
 nAll=0;
@@ -439,6 +455,12 @@ if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | gawk '/name="swap"/{m
 if curl -sS                     'localhost:8000?p=admin' | gawk '/name="swap"/{m=1} /name="paws"/{m=2} m==1&&!/selected/&&/\<1\>.*Őzes/{flag1=1} m==2&&!/selected/&&/\<1\>.*Őzes/ {flag2=1} END{exit(!(flag1&&flag2));}'; then echo ' + OK   :   order selections lifted at reload   1'; let nOK++; else echo ' - Wrong:   order selections not lifted at reload   1'; status=Wrong; fi; let nAll++;
 if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | gawk '/name="swap"/{m=1} /name="paws"/{m=2} m==1&&/selected.*\<1\>.*Vörös/{flag1=1} m==2&&/selected.*\<2\>.*Őzes/{flag2=1} END{exit(!(flag1&&flag2));}'; then echo ' + OK   : reorder selections   kept at feedback 1'; let nOK++; else echo ' - Wrong: reorder selections unkept at feedback 1'; status=Wrong; fi; let nAll++;
 if curl -sS                     'localhost:8000?p=admin' | gawk '/name="swap"/{m=1} /name="paws"/{m=2} m==1&&!/selected/&&/\<1\>.*Vörös/{flag1=1} m==2&&!/selected/&&/\<1\>.*Vörös/{flag2=1} END{exit(!(flag1&&flag2));}'; then echo ' + OK   : reorder selections lifted at reload   1'; let nOK++; else echo ' - Wrong: reorder selections not lifted at reload   1'; status=Wrong; fi; let nAll++;
+
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 before insertion'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 before insertion'; status=Wrong; fi; let nAll++;
+if curl -isS -d 'address=Majom utca 22' -d 'order=3' 'localhost:8000?p=admin&resource=flats' | gawk '/<.*html.*>/{isBody=1} NR==1&&/201\s+Created/{flagStat=1} !isBody&&/Location: .*n=201.*/{flagLoc=1} END{flag=flagLoc&&flagStat;exit(!flag)}'; then echo ' + OK   : Location header reports and URL referring to a flat #201'; let nOK++; else echo ' - Wrong: No Location header reporting any URL referring to a flat #201'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^3$'; then echo ' + OK   : COUNT flat =  3 after insertion, new flat inserted'; let nOK++; else echo ' - Wrong: COUNT flat <> 3 after insertion, no new flat inserted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
 
 
 echo;
