@@ -209,4 +209,25 @@ class Model
 		);
 		return $status;
 	}
+
+	public static function deleteFlat(int $id): bool
+	{
+		$lostOrder = self::findFlatOrder($id);
+		if ($lostOrder) {
+			list($status1, $pdo1, $st1) = Db::execute('DELETE FROM `flat` WHERE `id` = :id', [':id' => [$id, \PDO::PARAM_INT]]);
+			if ($status1) {
+				list($status2, $pdo2, $st2) = Db::execute('UPDATE `flat` SET `order` = `order` - 1 WHERE `order` > :lost_order', [':lost_order' => [$lostOrder, \PDO::PARAM_INT]]);
+			}
+		}
+		return boolval($lostOrder) && $status1 && $status2;
+	}
+
+	private static function findFlatOrder(int $id): ?int
+	{
+		$flat = Db::queryOne(
+			'SELECT `order` FROM `flat` WHERE `id` = :id',
+			[':id' => [$id, \PDO::PARAM_INT]]
+		);
+		return $flat ? $flat['order'] : null;
+	}
 }

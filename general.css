@@ -1,2 +1,4 @@
-span.OK    {color: green;}
-span.error {color: red  ;}
+span.OK   , div.OK    {color: green;}
+span.error, div.error {color: red  ;}
+
+li form {display:inline;}

@@ -465,6 +465,62 @@ if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after rei
 if curl -isS -d 'address=' 'localhost:8000?p=admin&resource=flats' | grep -q '[Nn]em.*üres'; then echo ' + OK   : Validadation refuses empty address'; let nOK++; else echo ' - Wrong: Validation accepts empty address'; status=Wrong; fi; let nAll++;
 if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
 
+
+
+
+if curl -isS -X DELETE -H 'Accept: application/json' 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | awk 'NR==1&&/204 No Content/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} END{exit(!(flagStat&&flagSep&&!flagBody))}'; then echo ' + OK   : Deletion provided RESTful status code (204 No Content) in case of sending real DELETE for valid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide RESTful status code (204 No Content) in case of sending real DELETE for valid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^1$'; then echo ' + OK   : COUNT flat =  1, flat record deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 1, flat record failed to be deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+if curl -isS -X POST -H 'Accept: application/json' 'localhost:8000?p=admin&resource=flats&method=DELETE&n=100' | tr -d '\r' | awk 'NR==1&&/204 No Content/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} END{exit(!(flagStat&&flagSep&&!flagBody))}'; then echo ' + OK   : Deletion provided RESTful status code (204 No Content)  in case of sending POST+querystring-mimicked DELETE for valid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide RESTful status code (204 No Content)  in case of sending POST+querystring-mimicked DELETE for valid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^1$'; then echo ' + OK   : COUNT flat =  1, flat record deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 1, flat record failed to be deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+
+
+if curl -isS -X DELETE -H 'Accept: application/json' 'localhost:8000?p=admin&resource=flats&n=432' | tr -d '\r' | awk 'NR==1&&/404 Not Found/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} END{exit(!(flagStat&&flagSep&&!flagBody))}'; then echo ' + OK   : Deletion provided RESTful status code (404 Not Found) in case of sending real DELETE for invalid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide RESTful status code (404 Not Found) in case of sending real DELETE for invalid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2, flat record not deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 2, flat record deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+if curl -isS -X POST -H 'Accept: application/json' 'localhost:8000?p=admin&resource=flats&method=DELETE&n=432' | tr -d '\r' | awk 'NR==1&&/404 Not Found/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} END{exit(!(flagStat&&flagSep&&!flagBody))}'; then echo ' + OK   : Deletion provided RESTful status code (404 Not Found)  in case of sending POST+querystring-mimicked DELETE for invalid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide RESTful status code (404 Not Found)  in case of sending POST+querystring-mimicked DELETE for invalid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2, flat record not deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 2, flat record deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+
+
+
+
+
+if curl -isS -X DELETE 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | awk 'NR==1&&/200 OK/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} flagBody&&/[Ss]iker.*törö?l/{flagOK=1} END{exit(!(flagStat&&flagSep&&flagBody&&flagOK))}'; then echo ' + OK   : Deletion provided plain status code (200 OK) in case of sending real DELETE for valid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide plain status code (200 OK) in case of sending real DELETE for valid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^1$'; then echo ' + OK   : COUNT flat =  1, flat record deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 1, flat record failed to be deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+if curl -isS -X POST 'localhost:8000?p=admin&resource=flats&method=DELETE&n=100' | tr -d '\r' | awk 'NR==1&&/200 OK/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} flagBody&&/[Ss]iker.*törö?l/{flagOK=1} END{exit(!(flagStat&&flagSep&&flagBody&&flagOK))}'; then echo ' + OK   : Deletion provided plain status code (200 OK)  in case of sending POST+querystring-mimicked DELETE for valid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide plain status code (200 OK)  in case of sending POST+querystring-mimicked DELETE for valid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^1$'; then echo ' + OK   : COUNT flat =  1, flat record deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 1, flat record failed to be deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+
+
+if curl -isS -X DELETE 'localhost:8000?p=admin&resource=flats&n=432' | tr -d '\r' | awk 'NR==1&&/200 OK/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} flagBody&&/[Nn]incs.*lakás/{flagFail=1} END{exit(!(flagStat&&flagSep&&flagBody&&flagFail))}'; then echo ' + OK   : Deletion provided plain status code (200 OK) in case of sending real DELETE for invalid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide plain status code (200 OK) in case of sending real DELETE for invalid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2, flat record not deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 2, flat record deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+if curl -isS -X POST 'localhost:8000?p=admin&resource=flats&method=DELETE&n=432' | tr -d '\r' | awk 'NR==1&&/200 OK/{flagStat=1;next;} !flagSep&&/^$/{flagSep=1;next;} flagSep{flagBody=1} flagBody&&/[Nn]incs.*lakás/{flagFail=1} END{exit(!(flagStat&&flagSep&&flagBody&&flagFail))}'; then echo ' + OK   : Deletion provided plain status code (200 OK)  in case of sending POST+querystring-mimicked DELETE for invalid resource'; let nOK++; else echo ' - Wrong: Deletion failed to provide plain status code (200 OK)  in case of sending POST+querystring-mimicked DELETE for invalid resource'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2, flat record not deleted'; let nOK++; else echo ' - Wrong: COUNT flat <> 2, flat record deleted'; status=Wrong; fi; let nAll++;
+reinitDB;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
+
+
+
+
+
 echo;
 echo '=================';
 echo "Σ: $status ($nOK/$nAll)";

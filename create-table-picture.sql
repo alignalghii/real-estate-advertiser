@@ -6,5 +6,5 @@ CREATE  TABLE `picture` (
 	PRIMARY KEY (`id`),
 	UNIQUE  KEY (`flat_id`, `order`   ),
 	UNIQUE  KEY (`flat_id`, `filename`),
-	FOREIGN KEY (`flat_id`) REFERENCES `flat` (`id`)
+	FOREIGN KEY (`flat_id`) REFERENCES `flat` (`id`) ON DELETE CASCADE
 );

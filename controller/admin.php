@@ -45,4 +45,19 @@ class AdminController
 		$mode = 'insert';
 		require 'view/admin.php';
 	}
+
+	public function deleteFlat_plain(int $n): void
+	{
+		$deleteStatus = Model::deleteFlat($n);
+		$deleteMessage = $deleteStatus ? 'Sikeres törlés!' : 'Nincs mit törölni, mert nincs ilyen lakás!';
+		$flats = Model::allFlatsWithPicsAmount();
+		$mode = 'delete';
+		require 'view/admin.php';
+	}
+
+	public function deleteFlat_REST(int $n): void
+	{
+		$status = Model::deleteFlat($n);
+		header($status ? 'HTTP/1.1 204 No Content' : 'HTTP/1.1 404 Not Found');
+	}
 }

@@ -2,6 +2,7 @@
 
 $method = empty($_GET['method']) ? $_SERVER['REQUEST_METHOD'] : $_GET['method'];
 $page   = $_GET['p'] ?? 'overview';
+$accept = $_SERVER['HTTP_ACCEPT'] ?? 'text/html';
 
 $missingParams = [];
 switch ([$method, $page]) {
@@ -41,6 +42,20 @@ switch ([$method, $page]) {
 			break;
 		} else {
 			$missingParams[] = 'QUERYSTRING `resource=flats` and `POST address=<string>`';
+		}
+	case ['DELETE', 'admin']:
+		if (isset($_GET['resource']) && $_GET['resource'] == 'flats' && isset($_GET['n']) && intval($_GET['n']) > 0) {
+			require 'controller/admin.php';
+			$n = intval($_GET['n']);
+			$controller = new AdminController;
+			if (preg_match('~application/json~', $accept)) {
+				$controller->deleteFlat_REST($n);
+			} else {
+				$controller->deleteFlat_plain($n);
+			}
+			break;
+		} else {
+			$missingParams[] = 'DELETE QUERYSTRING `resource=flats n=<int>`';
 		}
 	default:
 		require 'controller/error.php';

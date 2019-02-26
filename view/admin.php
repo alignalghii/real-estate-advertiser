@@ -15,9 +15,12 @@
 		<h2>Lakások listája</h2>
 		<ul>
 <?php foreach ($flats as $flat): ?>
-			<li>(<?php echo $flat['order']; ?>) #<?php echo $flat['id']; ?>: <?php echo $flat['address']; ?> (Képek száma: <?php echo $flat['pics']; ?> kép)</li>
+			<li>(<?php echo $flat['order']; ?>) #<?php echo $flat['id']; ?>: <?php echo $flat['address']; ?> (Képek száma: <?php echo $flat['pics']; ?> kép)<form method="POST" action="?p=admin&method=DELETE&resource=flats&n=<?php echo $flat['id']; ?>"><input type="submit" value="Töröld!"/></form></li>
 <?php endforeach; ?>
 		</ul>
+<?php if ($mode == 'delete'): ?>
+		<div class="<?php echo $deleteStatus ? 'OK' : 'error'; ?>"><?php echo $deleteMessage; ?></div>
+<?php endif; ?>
 		<h2>Sorrendcsereberélés</h2>
 		<form method="POST" action="?p=admin">
 			<select name="swap">
