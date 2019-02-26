@@ -463,6 +463,8 @@ reinitDB;
 if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
 
 if curl -isS -d 'address=' 'localhost:8000?p=admin&resource=flats' | grep -q '[Nn]em.*üres'; then echo ' + OK   : Validadation refuses empty address'; let nOK++; else echo ' - Wrong: Validation accepts empty address'; status=Wrong; fi; let nAll++;
+if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after refused insertion'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after refused insertion'; status=Wrong; fi; let nAll++;
+reinitDB;
 if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
 
 
