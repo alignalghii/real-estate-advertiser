@@ -2,7 +2,11 @@
 
 $method = empty($_GET['method']) ? $_SERVER['REQUEST_METHOD'] : $_GET['method'];
 $page   = $_GET['p'] ?? 'overview';
-$accept = $_SERVER['HTTP_ACCEPT'] ?? 'text/html';
+const PLAIN = 'text/html';
+const REST  = 'application/json';
+$accept = $_SERVER['HTTP_ACCEPT'] ?? PLAIN;
+function isREST (string $accept) {return preg_match('~'.REST .'~', $accept);}
+function isPlain(string $accept) {return preg_match('~'.PLAIN.'~', $accept);}
 
 $missingParams = [];
 switch ([$method, $page]) {
@@ -48,7 +52,7 @@ switch ([$method, $page]) {
 			require 'controller/admin.php';
 			$n = intval($_GET['n']);
 			$controller = new AdminController;
-			if (preg_match('~application/json~', $accept)) {
+			if (isREST($accept)) {
 				$controller->deleteFlat_REST($n);
 			} else {
 				$controller->deleteFlat_plain($n);
