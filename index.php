@@ -1,5 +1,7 @@
 <?php
 
+// @TODO Dispatch also by the `OPTIONS` method (see REST API)
+
 $method = empty($_GET['method']) ? $_SERVER['REQUEST_METHOD'] : $_GET['method'];
 $page   = $_GET['p'] ?? 'overview';
 const PLAIN = 'text/html';

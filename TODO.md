@@ -22,3 +22,12 @@
  - JavaScript testing with PhantomJS, Karma
  - Type info for function (forgotten at contructors and controller methods)
  - No handling for case when database connection is OK but no tables are created yet. Also consider handling of wrong connection, or existing but empty tables.
+
+# In cirl-grep test (`webtest.bash`)
+
+ - Besides `low-level`, do also for `high plain-level` and `high REST-level` at the database-reinitialization-with sample-data test: the willful breaking of the database should be done not only with direct insertion and deletion, but also with high-level (plain or REST) curl-ing.
+ - Replace `awk` to `gawk`
+
+# Router (`index.php`)
+
+ - Dispatch also by the `OPTIONS` method (see REST API)
