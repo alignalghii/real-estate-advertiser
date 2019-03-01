@@ -230,4 +230,53 @@ class Model
 		);
 		return $flat ? $flat['order'] : null;
 	}
+
+	public static function reinitDBWithSampleData(): bool
+	{
+		$status1 = self::reinitDB();
+		list($status2, $pdo2, $st2) = Db::execute("
+			INSERT INTO `flat`
+			(`id`, `order`, `address`     ) VALUES
+			(100 ,  1     , 'Vörös u. 99' ),
+			(200 ,  2     , 'Őzes út  67' )
+		");
+		list($status3, $pdo3, $st3) = Db::execute("
+			INSERT INTO `picture`
+			(`id`, `flat_id`, `order`, `filename`     ) VALUES
+			( 110,  100     ,  1     , 'kitchen.jpg'  ),
+			( 120,  100     ,  2     , 'vestible.jpg' ),
+			( 210,  200     ,  1     , 'kitchen.jpg'  ),
+			( 220,  200     ,  2     , 'toilet.jpg'   ),
+			( 230,  200     ,  3     , 'bedroom.jpg'  )
+		");
+		return $status1 && $status2 && $status3;
+	}
+
+	public static function reinitDB(): bool
+	{
+		list($status1, $pdo1, $st1) = Db::execute('DROP TABLE `picture`');
+		list($status2, $pdo2, $st2) = Db::execute('DROP TABLE `flat`');
+		list($status3, $pdo3, $st3) = Db::execute('
+			CREATE TABLE `flat` (
+				`id`      INT          NOT NULL AUTO_INCREMENT,
+				`address` VARCHAR(256) NOT NULL,
+				`order`   INT          NOT NULL,
+				PRIMARY KEY (`id`),
+				UNIQUE  KEY (`order`)
+			)
+		');
+		list($status4, $pdo4, $st4) = Db::execute('
+			CREATE  TABLE `picture` (
+				`id`       INT          NOT NULL AUTO_INCREMENT,
+				`flat_id`  INT          NOT NULL,
+				`order`    INT          NOT NULL,
+				`filename` VARCHAR(256) NOT NULL,
+				PRIMARY KEY (`id`),
+				UNIQUE  KEY (`flat_id`, `order`   ),
+				UNIQUE  KEY (`flat_id`, `filename`),
+				FOREIGN KEY (`flat_id`) REFERENCES `flat` (`id`) ON DELETE CASCADE
+			)
+		');
+		return $status1 && $status2 && $status3 && $status4;
+	}
 }

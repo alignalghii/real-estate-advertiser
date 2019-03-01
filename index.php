@@ -61,6 +61,19 @@ switch ([$method, $page]) {
 		} else {
 			$missingParams[] = 'DELETE QUERYSTRING `resource=flats n=<int>`';
 		}
+	case ['PUT', 'admin']:
+		if (isset($_GET['resource']) && $_GET['resource'] == 'flats' && !isset($_GET['n']) && isset($_GET['subcommand']) && $_GET['subcommand'] == 'sample-data') {
+			require 'controller/admin.php';
+			$controller = new AdminController;
+			if (isREST($accept)) {
+				$controller->reinitDBWithDefaultSampleData_REST ();
+			} else {
+				$controller->reinitDBWithDefaultSampleData_plain();
+			}
+			break;
+		} else {
+			$missingParams[] = 'PUT QUERYSTRING `resource=flats subcommand=sample-data`';
+		}
 	default:
 		require 'controller/error.php';
 		$missingParams = implode(', OR ', $missingParams);

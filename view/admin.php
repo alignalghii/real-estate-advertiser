@@ -9,7 +9,8 @@
 	<body>
 		<ul class="navigation">
 			<li><a href="/"><?php echo Icon::USER; ?> Felhasználói felület</a></li>
-			<li><a href="?p=admin">Teljes űrlap újrakezdése (eddigi gépelések törlése)</a></li>
+			<li><a href="?p=admin">✍️ Teljes űrlap újrakezdése (eddigi gépelések, üzenetek törlése)</a></li>
+			<li><form method="POST" action="?p=admin&method=PUT&resource=flats&subcommand=sample-data"><input type="submit" value="🕮 Adatbázis újratöltése mintaadatokkal"/><?php if ($mode == 'reinit'): ?> <span class="<?php echo $reinitStatus ? 'OK' : 'error'; ?>"><?php echo $reinitMessage; ?></span><?php endif; ?></form>
 		</ul>
 		<h1>Ingatlanhirdető | Admin</h1>
 		<h2>Lakások listája</h2>

@@ -16,6 +16,21 @@ function reinitDB {
 	mysql real_estate_advertiser;
 }
 
+function checkVirginityOfDBSample {
+	if
+		mysql -N real_estate_advertiser <<< 'SELECT * FROM `flat` ORDER BY `order`'\
+		|
+		awk 'NR==1&&/^100\tVörös u.\ 99\t1$/{flag1=1} NR==2&&/200\tŐzes út  67\t2$/{flag2=1} NR>2{flag3=1} END {exit(!(flag1&&flag2&&!flag3))}';
+		then
+			echo " $2: Right after $1, the DB contains exactly the virgin sample";
+			true;
+		else
+			echo " $3: Right after $1, the DB does not contain exactly the virgin sample";
+			false;
+	fi;
+}
+
+
 status=OK;
 nOK=0;
 nAll=0;
@@ -23,6 +38,7 @@ nAll=0;
 echo '### OVERVIEW ###';
 
 echo;
+
 
 echo '## No GET param ##';
 if   curl -sS localhost:8000     | grep -q '<a class="timer" data-interval="15" href="?n=200">.\{0,33\}[Kk]örbe.\{0,22\}</a>'      ; then echo ' + OK   : wait for the second'          ; let nOK++; else echo ' - Wrong: no or improper waiting'         ; status=Wrong; fi; let nAll++;
@@ -520,6 +536,44 @@ reinitDB;
 if numberOf flat | grep -q '^2$'; then echo ' + OK   : COUNT flat =  2 after reinit'; let nOK++; else echo ' - Wrong   : COUNT flat <> 2 after reinit'; status=Wrong; fi; let nAll++;
 
 
+
+
+# @TODO besides `low-level`, do also for `high plain-level` and `high REST-level`
+# @TODO replace `awk` to `gawk`
+reinitDB;
+if checkVirginityOfDBSample 'low-level reinit'    '+ OK   ' '- Wrong'; then let nOK++       ; else status=Wrong; fi; let nAll++;
+
+mysql real_estate_advertiser <<< 'DELETE FROM `flat` WHERE `id` = 200';
+if checkVirginityOfDBSample 'low-level deletion'  '- Wrong' '+ OK   '; then let status=Wrong; else let nOK++   ; fi; let nAll++;
+reinitDB;
+
+mysql real_estate_advertiser <<< 'INSERT INTO `flat` (`address`, `order`) VALUE ('"'"'Majomtanya'"'"', 3)';
+if checkVirginityOfDBSample 'low-level insertion' '- Wrong' '+ OK   '; then let status=Wrong; else let nOK++   ; fi; let nAll++;
+reinitDB;
+
+
+
+mysql real_estate_advertiser <<< 'DELETE FROM `flat` WHERE `id` = 200';
+if curl -isS -X POST 'localhost:8000?p=admin&method=PUT&resource=flats&subcommand=sample-data' | tr -d '\r' | gawk 'NR==1&&/200 OK/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep&&/[Aa]datbázis.*mint[aá].*siker.*újra/{flagMsg=1} END{exit(!(flagStatCode&&flagSep&&flagMsg))}'; then echo ' + OK   : High-level plain reinit renders appropriate status code and form message'; let nOK++; else echo ' - Wrong: High level plain reinit renders wrong status code or form message'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'low-level deletion and high-level plain reinit'   '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+mysql real_estate_advertiser <<< 'INSERT INTO `flat` (`address`, `order`) VALUE ('"'"'Majomtanya'"'"', 3)';
+if curl -isS -X POST 'localhost:8000?p=admin&method=PUT&resource=flats&subcommand=sample-data' | tr -d '\r' | gawk 'NR==1&&/200 OK/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep&&/[Aa]datbázis.*mint[aá].*siker.*újra/{flagMsg=1} END{exit(!(flagStatCode&&flagSep&&flagMsg))}'; then echo ' + OK   : High-level plain reinit renders appropriate status code and form message'; let nOK++; else echo ' - Wrong: High level plain reinit renders wrong status code or form message'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'low-level insertion and high-level plain reinit'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+
+
+mysql real_estate_advertiser <<< 'DELETE FROM `flat` WHERE `id` = 200';
+if curl -isS -X POST -H 'Accept: application/json' 'localhost:8000?p=admin&method=PUT&resource=flats&subcommand=sample-data' | tr -d '\r' | gawk 'NR==1&&/201 No Content/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep{flagBody=1} END{exit(!(flagStatCode&&flagSep&&!flagBody))}'; then echo ' + OK   : High-level REST reinit renders appropriate status code'; let nOK++; else echo ' - Wrong: High level REST reinit renders wrong status code'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'low-level deletion and high-level REST reinit'   '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+mysql real_estate_advertiser <<< 'INSERT INTO `flat` (`address`, `order`) VALUE ('"'"'Majomtanya'"'"', 3)';
+if curl -isS -X POST  -H 'Accept: application/json' 'localhost:8000?p=admin&method=PUT&resource=flats&subcommand=sample-data' | tr -d '\r' | gawk 'NR==1&&/201 No Content/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next;} flagSep{flagBody=1} END{exit(!(flagStatCode&&flagSep&&!flagBody))}'; then echo ' + OK   : High-level REST reinit renders appropriate status code'; let nOK++; else echo ' - Wrong:  High-level REST reinit renders wrong status code'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'low-level insertion and high-level REST reinit'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
 
 
 

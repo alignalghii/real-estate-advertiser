@@ -60,4 +60,19 @@ class AdminController
 		$status = Model::deleteFlat($n);
 		header($status ? 'HTTP/1.1 204 No Content' : 'HTTP/1.1 404 Not Found');
 	}
+
+	public function reinitDBWithDefaultSampleData_REST (): void
+	{
+		$status = Model::reinitDBWithSampleData();
+		header($status ? 'HTTP/1.1 201 No Content' : 'HTTP/1.1 500 Internal Server Error');
+	}
+
+	public function reinitDBWithDefaultSampleData_plain(): void
+	{
+		$reinitStatus  = Model::reinitDBWithSampleData();
+		$reinitMessage = $reinitStatus ? 'Adatbázis mintából sikeresen újraindítva!' : 'Adatbázis mintából való újraindítása meghiúsult!';
+		$flats = Model::allFlatsWithPicsAmount();
+		$mode = 'reinit';
+		require 'view/admin.php';
+	}
 }
