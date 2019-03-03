@@ -16,11 +16,14 @@
 		<h2>Lakások listája</h2>
 		<ul>
 <?php foreach ($flats as $flat): ?>
-			<li>(<?php echo $flat['order']; ?>) #<?php echo $flat['id']; ?>: <?php echo $flat['address']; ?> (Képek száma: <?php echo $flat['pics']; ?> kép)<form method="POST" action="?p=admin&method=DELETE&resource=flats&n=<?php echo $flat['id']; ?>"><input type="submit" value="Töröld!"/></form></li>
+			<li>(<?php echo $flat['order']; ?>) #<?php echo $flat['id']; ?>: <form method="POST" action="?p=admin&method=PATCH&resource=flats&n=<?php echo $flat['id']; ?>"><input type="text" name="address" value="<?php echo $flat['address']; ?>"/> (Képek száma: <?php echo $flat['pics']; ?> kép)<input type="submit" value="Szerkeszd át!"/></form> <form method="POST" action="?p=admin&method=DELETE&resource=flats&n=<?php echo $flat['id']; ?>"><input type="submit" value="Töröld!"/></form><?php if ($mode == 'update' && $flat['id'] == $id): ?> <span class="<?php echo $updateStatus ? 'OK' : 'error'; ?>"><?php echo $updateMessage; ?></span><?php endif; ?></li>
 <?php endforeach; ?>
 		</ul>
 <?php if ($mode == 'delete'): ?>
 		<div class="<?php echo $deleteStatus ? 'OK' : 'error'; ?>"><?php echo $deleteMessage; ?></div>
+<?php endif; ?>
+<?php if ($mode == 'update' && !$isValidId): ?>
+		<div class="<?php echo $updateStatus ? 'OK' : 'error'; ?>"><?php echo $updateMessage; ?></div>
 <?php endif; ?>
 		<h2>Sorrendcsereberélés</h2>
 		<form method="POST" action="?p=admin">

@@ -4,6 +4,12 @@ require_once 'Db.php';
 
 class Model
 {
+	const SIGNATURE_FLAT   = ['address' => \PDO::PARAM_STR];
+	const EQUIVALENCE_FLAT = ['address' => [self::class, 'addressEquivalence']];
+	const VALIDATOR_FLAT   = ['address' => [self::class, 'addressValidator'  ]];
+	public static function addressValidator  (string $address): bool   {return $address !== '';}
+	public static function addressEquivalence(string $address): string {return trim($address) ;} // @TODO also a regexp substituter should remove duplicate whitespaces
+
 	public static function countOfFlats(): int
 	{
 		return Db::queryOne('SELECT COUNT(*) AS `n` FROM `flat`')['n'];
@@ -278,5 +284,37 @@ class Model
 			)
 		');
 		return $status1 && $status2 && $status3 && $status4;
+	}
+
+
+	public static function updateFlat(int $id, array $requestEntityArray): bool
+	{
+		$requestFieldNames = array_keys($requestEntityArray);
+		$tableFieldNames   = array_keys(self::SIGNATURE_FLAT);
+		$doable = subset($requestFieldNames, $tableFieldNames);
+		if ($doable) {
+			$validates = true;
+			foreach ($requestEntityArray as $fieldName => $value) {
+				$equivalence = self::EQUIVALENCE_FLAT[$fieldName];
+				$validator   = self::VALIDATOR_FLAT[$fieldName];
+				$pdoType     = self::SIGNATURE_FLAT[$fieldName];
+				$value       = $equivalence($value);
+				$validates   = $validates && $validator($value);
+				if ($validates) {
+					list($status, $pdo, $st) = Db::execute(
+						"
+							UPDATE `flat` SET `$fieldName` = :value
+							WHERE `id` = :id
+						",
+						[
+							':id'    => [$id   , \PDO::PARAM_INT],
+							':value' => [$value, $pdoType]
+						]
+					);
+					$validates = $validates && $status;
+				}
+			}
+		}
+		return $doable && $validates;
 	}
 }

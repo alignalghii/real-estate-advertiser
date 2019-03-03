@@ -6,9 +6,29 @@ $method = empty($_GET['method']) ? $_SERVER['REQUEST_METHOD'] : $_GET['method'];
 $page   = $_GET['p'] ?? 'overview';
 const PLAIN = 'text/html';
 const REST  = 'application/json';
-$accept = $_SERVER['HTTP_ACCEPT'] ?? PLAIN;
-function isREST (string $accept) {return preg_match('~'.REST .'~', $accept);}
-function isPlain(string $accept) {return preg_match('~'.PLAIN.'~', $accept);}
+$accept      = $_SERVER['HTTP_ACCEPT'      ] ?? PLAIN;
+$contentType = $_SERVER['HTTP_CONTENT_TYPE'] ?? PLAIN;
+function isREST (string $mimeType): bool {return (bool) preg_match('~'.REST .'~', $mimeType);}
+function isPlain(string $mimeType): bool {return (bool) preg_match('~'.PLAIN.'~', $mimeType);}
+function subset(array $as, array $bs): bool {$is = true; foreach ($as as $a) $is = $is && in_array($a, $bs); return $is;}
+
+function retrieve_POST_PUT_OR_PATCH(): array
+{
+	if ($_POST) {
+		$entityArray = $_POST;
+	} else {
+		$entityData = file_get_contents('php://input');
+		parse_str($entityData, $entityArray); // @TODO: Use & character in street address, it confuses `controller/index.php::parse_str`
+	}
+	return $entityArray;
+}
+
+function retrieveJsonArrayIfPossible(): ?array
+{
+	$rawPostData = file_get_contents('php://input');
+	$json        = json_decode($rawPostData, true);
+	return         is_array($json) ? $json : null;
+}
 
 $missingParams = [];
 switch ([$method, $page]) {
@@ -75,6 +95,23 @@ switch ([$method, $page]) {
 			break;
 		} else {
 			$missingParams[] = 'PUT QUERYSTRING `resource=flats subcommand=sample-data`';
+		}
+	case ['PATCH', 'admin']:
+		if (isset($_GET['resource']) && $_GET['resource'] == 'flats' && isset($_GET['n']) && intval($_GET['n']) > 0) {
+			require 'controller/admin.php';
+			$isREST     = isREST($contentType);
+			$controller = new AdminController;
+			$n = intval($_GET['n']);
+			if (isREST($contentType)) {
+				$jsonArray = retrieveJsonArrayIfPossible();
+				$controller->updateFlat_REST ($n, $jsonArray);
+			} else {
+				$entityArray = retrieve_POST_PUT_OR_PATCH(); // @TODO: Use & character in street address, it confuses `controller/index.php::parse_str`
+				$controller->updateFlat_plain($n, $entityArray);
+			}
+			break;
+		} else {
+			$missingParams[] = 'PATCH QUERYSTRING `resource=flats n=<int> BODY {address: <string>}`';
 		}
 	default:
 		require 'controller/error.php';

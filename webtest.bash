@@ -426,45 +426,45 @@ echo;
 
 echo '### ADMIN ###';
 
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q 'Sikeresen felcseréltem'; then echo ' + OK   : order updater'; let nOK++; else echo ' - Wrong: order updater failed'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q 'Sikeresen felcseréltem'; then echo ' + OK   : order updater'; let nOK++; else echo ' - Wrong: order updater failed'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 if curl -sS -d swap=1 -d paws=1 'localhost:8000?p=admin' | grep -q '[Kk]ülönböző'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 if curl -sS -d swap=2 -d paws=2 'localhost:8000?p=admin' | grep -q '[Kk]ülönböző'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 if curl -sS -d swap=0 -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 if curl -sS -d swap=3 -d paws=1 'localhost:8000?p=admin' | grep -q '[Ll]étező'; then echo ' + OK   : order error report'; let nOK++; else echo ' - Wrong: order error report missing'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 if curl -sS -d swap='' -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 if curl -sS            -d paws=1 'localhost:8000?p=admin' | grep -q 'Error: No such route'; then echo ' + OK   : order route failure reported'; let nOK++; else echo ' - Wrong: order route failure missing'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
-if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : admin catalogue 1'; let nOK++; else echo ' - Wrong: admin catalogue missing 1'; status=Wrong; fi; let nAll++;
+if curl -sS 'localhost:8000?p=admin' | grep -q '\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : admin catalogue 2'; let nOK++; else echo ' - Wrong: admin catalogue missing 2'; status=Wrong; fi; let nAll++;
 
 
 
-if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<2\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   :   order immediate feedback 1'; let nOK++; else echo ' - Wrong:   order immediate feedback 1 failed'; status=Wrong; fi; let nAll++;
-if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<1\>.\{0,22\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : reorder immediate feedback 1'; let nOK++; else echo ' - Wrong: reorder immediate feedback 1 failed'; status=Wrong; fi; let nAll++;
-if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<1\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   :   order immediate feedback 2'; let nOK++; else echo ' - Wrong:   order immediate feedback 2 failed'; status=Wrong; fi; let nAll++;
-if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<2\>.\{0,22\}Őzes út  67\b.*3 kép'; then echo ' + OK   : reorder immediate feedback 2'; let nOK++; else echo ' - Wrong: reorder immediate feedback 2 failed'; status=Wrong; fi; let nAll++;
+if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<2\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   :   order immediate feedback 1'; let nOK++; else echo ' - Wrong:   order immediate feedback 1 failed'; status=Wrong; fi; let nAll++;
+if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<1\>.\{0,177\}Vörös u. 99\b.*2 kép'; then echo ' + OK   : reorder immediate feedback 1'; let nOK++; else echo ' - Wrong: reorder immediate feedback 1 failed'; status=Wrong; fi; let nAll++;
+if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<1\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   :   order immediate feedback 2'; let nOK++; else echo ' - Wrong:   order immediate feedback 2 failed'; status=Wrong; fi; let nAll++;
+if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | grep -q '<li>.*\<2\>.\{0,177\}Őzes út  67\b.*3 kép'; then echo ' + OK   : reorder immediate feedback 2'; let nOK++; else echo ' - Wrong: reorder immediate feedback 2 failed'; status=Wrong; fi; let nAll++;
 
 
 if curl -sS -d swap=1 -d paws=2 'localhost:8000?p=admin' | gawk '/name="swap"/{m=1} /name="paws"/{m=2} m==1&&/selected.*\<1\>.*Őzes/{flag1=1} m==2&&/selected.*\<2\>.*Vörös/{flag2=1} END{exit(!(flag1&&flag2));}'; then echo ' + OK   :   order selections   kept at feedback 1'; let nOK++; else echo ' - Wrong:   order selections unkept at feedback 1'; status=Wrong; fi; let nAll++;
@@ -575,7 +575,84 @@ if curl -isS -X POST  -H 'Accept: application/json' 'localhost:8000?p=admin&meth
 if checkVirginityOfDBSample 'low-level insertion and high-level REST reinit'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
 reinitDB;
 
+######################
+# Update flat records
 
+#if
+#	mysql -N real_estate_advertiser <<< 'SELECT * FROM `flat` ORDER BY `order`'\
+#	|
+#	awk 'NR==1&&/^100\tMajomtanya\t1$/{flag1=1} NR==2&&/200\tŐzes út  67\t2$/{flag2=1} NR>2{flag3=1} END {exit(!(flag1&&flag2&&!flag3))}';
+#	then
+#		echo " + OK: Right after $1, the DB contains exactly the virgin sample";
+#		let nOK++;
+#	else
+#		echo " $3: Right after $1, the DB does not contain exactly the virgin sample";
+#		status=Wrong;
+#fi;
+#let nAll++;
+
+
+## REST:
+
+reinitDB;
+if curl -isS -X PATCH -H 'Accept:' -H 'Content-Type: application/json' -d '{"address": " Majomtanya\t"}' 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | gawk 'NR==1&&/204 No Content/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep{flagBody=1} END{exit(!(flagStatCode&&flagSep&&!flagBody))}'; then echo ' + OK   : REST PATCH with valid flat id and address causes `204 No Content` status code and no body'; let nOK++; else echo ' - Wrong: REST PATCH with valid flat id and address response status code is not `204 No Content` status, or body exists'; status=Wrong; fi; let nAll++;
+if diff <(mysql -N real_estate_advertiser <<< 'SELECT * FROM `flat` ORDER BY `order`;') <(reinitDB; mysql -N real_estate_advertiser <<< 'UPDATE `flat` SET `address` = '"'"'Majomtanya'"'"' WHERE `id` = 100; SELECT * FROM `flat` ORDER BY `order`;') > /dev/null; then echo ' + OK   : REST PATCH with valid flat id and address updates record accordingly'; let nOK++; else echo ' - Wrong: REST PATCH with valid flat id and address fails to update record accordingly'; status=Wrong; fi; let nAll++;
+reinitDB;
+
+reinitDB;
+if curl -isS -X PATCH -H 'Accept:' -H 'Content-Type: application/json' -d '{"address": "Kutyamacska"}' 'localhost:8000?p=admin&resource=flats&n=987' | tr -d '\r' | gawk 'NR==1&&/404 Not Found/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep{flagBody=1} END{exit(!(flagStatCode&&flagSep&&!flagBody))}'; then echo ' + OK   : REST PATCH with wrong flat id causes `404 Not Found` status code and no body'; let nOK++; else echo ' - Wrong: REST PATCH with wrong flat id response status code is not `404 Not Found` status, or body exists'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'high level REST update of a flat, but with wrong ID'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+reinitDB;
+if curl -isS -X PATCH -H 'Accept:' -H 'Content-Type: application/json' -d '{"address": " \t "}' 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | gawk 'NR==1&&/400 Bad Request/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep{flagBody=1} END{exit(!(flagStatCode&&flagSep&&!flagBody))}'; then echo ' + OK   : REST PATCH with empty flat address causes `400 Bad Request` status code and no body'; let nOK++; else echo ' - Wrong: REST PATCH with empty flat address response status code is not `400 Bad Request` status, or body exists'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'high level REST update of a flat, but with empty address'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+# Empy updater set is considered as legal
+
+reinitDB;
+if curl -isS -X PATCH -H 'Accept:' -H 'Content-Type: application/json' -d '{}' 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | gawk 'NR==1&&/204 No Content/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep{flagBody=1} END{exit(!(flagStatCode&&flagSep&&!flagBody))}'; then echo ' + OK   : REST PATCH with empty updater set causes `204 No Content` status code and no body'; let nOK++; else echo ' - Wrong: REST PATCH with empty updater set response status code is not `204 No Content` status, or body exists'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'high level REST update of a flat, but with empty updater set'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+# Invalid JSON is considered as illegal (Bad Request) @TODO
+
+reinitDB;
+if curl -isS -X PATCH -H 'Accept:' -H 'Content-Type: application/json' -d '{' 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | gawk 'NR==1&&/400 Bad Request/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep{flagBody=1} END{exit(!(flagStatCode&&flagSep&&!flagBody))}'; then echo ' + OK   : REST PATCH with invalid JSON causes `204 No Content` status code and no body'; let nOK++; else echo ' - Wrong: REST PATCH with invalid JSON response status code is not `204 No Content` status, or body exists'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'high level REST update of a flat, but with invalid JSON'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+
+
+## Plain
+
+# @TODO Address trim ellenőrzése. Régi cím visszaírása a képernyőrehiba esetén. Új cím visszaírása a kpernyőre siker esetén
+
+
+reinitDB;
+if curl -isS -X PATCH -d address=" Majomtanya	" 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | gawk 'NR==1&&/200 OK/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep&&/Sikeresen átírva/{flagMsg=1} flagSep&&/[^ 	]Majomtanya[^ 	]/{flagRwNew=1;next} flagSep&&/Vörös/{flagRwOld1=1} flagRwNew&&/Őzes/{flagRwOld2=1} END{exit(!(flagStatCode&&flagSep&&flagMsg&&flagRwNew&&!flagRwOld1&&flagRwOld2))}'; then echo ' + OK   : Plain PATCH with valid flat id and address causes approval message, and writes new address back'; let nOK++; else echo ' - Wrong: Plain PATCH with valid flat id and address fails to cause approval message, or fails to write new address back'; status=Wrong; fi; let nAll++;
+if diff <(mysql -N real_estate_advertiser <<< 'SELECT * FROM `flat` ORDER BY `order`;') <(reinitDB; mysql -N real_estate_advertiser <<< 'UPDATE `flat` SET `address` = '"'"'Majomtanya'"'"' WHERE `id` = 100; SELECT * FROM `flat` ORDER BY `order`;') > /dev/null; then echo ' + OK   : Plain PATCH with valid flat id and address updates record accordingly'; let nOK++; else echo ' - Wrong: Plain PATCH with valid flat id and address fails to update record accordingly'; status=Wrong; fi; let nAll++;
+reinitDB;
+
+reinitDB;
+if curl -isS -X PATCH -d 'address=Kutyamacska' 'localhost:8000?p=admin&resource=flats&n=987' | tr -d '\r' | gawk 'NR==1&&/200 OK/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep&&/Azonosíthatatlan.*lakás/{flagMsg=1} flagSep&&/Kutyamacska/{flagRwNew=1} flagSep&&/Vörös/{flagRwOld1=1;next} flagRwOld1&&/Őzes/{flagRwOld2=1} END{exit(!(flagStatCode&&flagSep&&flagMsg&&!flagRwNew&&flagRwOld1&&flagRwOld2))}'; then echo ' + OK   : Plain PATCH with wrong flat id causes appropriate error message, and writes old addresses back'; let nOK++; else echo ' - Wrong: Plain PATCH with wrong flat id fails to cause appropriate error message, or fails to write old addresses back'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'Plain level REST update of a flat, but with wrong ID'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+reinitDB;
+if curl -isS -X PATCH -d address=" 	 " 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | gawk 'NR==1&&/200 OK/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep&&/[Éé]rvénytelen.*lakáscím/{flagMsg=1} flagSep&&/Vörös u.*99/{flagRwOld1=1;next} flagRwOld1&&/Őzes/{flagRwOld2=1} END{exit(!(flagStatCode&&flagSep&&flagMsg&&flagRwOld1&&flagRwOld2))}'; then echo ' + OK   : Plain PATCH with empty/all-whitespace flat address causes appropriate error message, and writes the old address back'; let nOK++; else echo ' - Wrong: plain PATCH with empty/all-whitespace flat address fails to cause appropriate error message, or fails to write the old address back'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'high level plain update of a flat, but with empty/all-whitespace address'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+# Empy updater set is considered as legal
+
+reinitDB;
+if curl -isS -X PATCH 'localhost:8000?p=admin&resource=flats&n=100' | tr -d '\r' | gawk 'NR==1&&/200 OK/{flagStatCode=1;next} flagStatCode&&/^$/{flagSep=1;next} flagSep&&/Sikeresen átírva/{flagMsg=1} flagSep&&/Vörös/{flagRwOld1=1;next} flagRwOld1&&/Őzes/{flagRwOld2=1} END{exit(!(flagStatCode&&flagSep&&flagMsg&&flagRwOld1&&flagRwOld2))}'; then echo ' + OK   : Plain PATCH with empty updater set causes approval message, and writes old addresses back'; let nOK++; else echo ' - Wrong: Plain PATCH with empty updater set fails to cause approval message, or fails to write old addresses back'; status=Wrong; fi; let nAll++;
+if checkVirginityOfDBSample 'high level plain update of a flat, but with empty updater set'  '+ OK   ' '- Wrong'; then let nOK++; else status=Wrong; fi; let nAll++;
+reinitDB;
+
+# @TODO: Use & character in street address, it confuses `controller/index.php::parse_str`
 
 echo;
 echo '=================';

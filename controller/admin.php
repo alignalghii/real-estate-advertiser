@@ -75,4 +75,43 @@ class AdminController
 		$mode = 'reinit';
 		require 'view/admin.php';
 	}
+
+
+	public function updateFlat_REST(int $id, ?array $entityArray): void
+	{
+		$isValidId          = Model::overviewValidFlat($id);
+		$isValidEntityArray = isset($entityArray);
+		if ($isValidId && $isValidEntityArray) {
+			$status = Model::updateFlat($id, $entityArray);
+			if ($status) {
+				header('HTTP/1.1 204 No Content');
+				header('Content-type: application/json');
+				header_remove('Content-type');
+			} else {
+				header('HTTP/1.1 400 Bad Request');
+				header('Content-type: application/json');
+				header_remove('Content-type');
+			}
+		} else {
+			if (!$isValidId         ) header('HTTP/1.1 404 Not Found'  );
+			if (!$isValidEntityArray) header('HTTP/1.1 400 Bad Request');
+			header('Content-type: application/json');
+			header_remove('Content-type');
+		}
+	}
+
+	public function updateFlat_plain(int $id, array $entityArray): void
+	{
+		$isValidId  = Model::overviewValidFlat($id);
+		if ($isValidId) {
+			$status = Model::updateFlat($id, $entityArray);
+			list($updateStatus, $updateMessage) = $status ? [true , 'Sikeresen átírva!']
+			                                              : [false, 'Érvénytelen az üres lakáscím!'];
+		} else {
+			list($updateStatus, $updateMessage) =           [false, 'Azonosíthatatlan a módosítandó lakás!'];
+		}
+		$flats = Model::allFlatsWithPicsAmount();
+		$mode = 'update';
+		require 'view/admin.php';
+	}
 }
